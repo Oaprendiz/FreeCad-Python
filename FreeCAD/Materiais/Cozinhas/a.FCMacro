@@ -1,0 +1,267 @@
+# -*- coding: utf-8 -*-
+
+# Macro Begin: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\a.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++
+import FreeCAD
+import Part
+
+App.activeDocument().addObject("Part::Cut","Cut006")
+App.activeDocument().Cut006.Base = App.activeDocument().Cut005
+App.activeDocument().Cut006.Tool = App.activeDocument().Cylinder005
+#Gui.activeDocument().hide("Cut005")
+#Gui.activeDocument().hide("Cylinder005")
+#Gui.ActiveDocument.Cut006.ShapeColor=Gui.ActiveDocument.Cut005.ShapeColor
+#Gui.ActiveDocument.Cut006.DisplayMode=Gui.ActiveDocument.Cut005.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut007")
+App.activeDocument().Cut007.Base = App.activeDocument().Cut006
+App.activeDocument().Cut007.Tool = App.activeDocument().Cylinder006
+#Gui.activeDocument().hide("Cut006")
+#Gui.activeDocument().hide("Cylinder006")
+#Gui.ActiveDocument.Cut007.ShapeColor=Gui.ActiveDocument.Cut006.ShapeColor
+#Gui.ActiveDocument.Cut007.DisplayMode=Gui.ActiveDocument.Cut006.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut008")
+App.activeDocument().Cut008.Base = App.activeDocument().Cut007
+App.activeDocument().Cut008.Tool = App.activeDocument().Cylinder007
+#Gui.activeDocument().hide("Cut007")
+#Gui.activeDocument().hide("Cylinder007")
+#Gui.ActiveDocument.Cut008.ShapeColor=Gui.ActiveDocument.Cut007.ShapeColor
+#Gui.ActiveDocument.Cut008.DisplayMode=Gui.ActiveDocument.Cut007.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut009")
+App.activeDocument().Cut009.Base = App.activeDocument().Cut008
+App.activeDocument().Cut009.Tool = App.activeDocument().Cylinder008
+#Gui.activeDocument().hide("Cut008")
+#Gui.activeDocument().hide("Cylinder008")
+#Gui.ActiveDocument.Cut009.ShapeColor=Gui.ActiveDocument.Cut008.ShapeColor
+#Gui.ActiveDocument.Cut009.DisplayMode=Gui.ActiveDocument.Cut008.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut010")
+App.activeDocument().Cut010.Base = App.activeDocument().Cut009
+App.activeDocument().Cut010.Tool = App.activeDocument().Cylinder009
+#Gui.activeDocument().hide("Cut009")
+#Gui.activeDocument().hide("Cylinder009")
+#Gui.ActiveDocument.Cut010.ShapeColor=Gui.ActiveDocument.Cut009.ShapeColor
+#Gui.ActiveDocument.Cut010.DisplayMode=Gui.ActiveDocument.Cut009.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut011")
+App.activeDocument().Cut011.Base = App.activeDocument().Cut010
+App.activeDocument().Cut011.Tool = App.activeDocument().Cylinder010
+#Gui.activeDocument().hide("Cut010")
+#Gui.activeDocument().hide("Cylinder010")
+#Gui.ActiveDocument.Cut011.ShapeColor=Gui.ActiveDocument.Cut010.ShapeColor
+#Gui.ActiveDocument.Cut011.DisplayMode=Gui.ActiveDocument.Cut010.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut012")
+App.activeDocument().Cut012.Base = App.activeDocument().Cut011
+App.activeDocument().Cut012.Tool = App.activeDocument().Cylinder011
+#Gui.activeDocument().hide("Cut011")
+#Gui.activeDocument().hide("Cylinder011")
+#Gui.ActiveDocument.Cut012.ShapeColor=Gui.ActiveDocument.Cut011.ShapeColor
+#Gui.ActiveDocument.Cut012.DisplayMode=Gui.ActiveDocument.Cut011.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut013")
+App.activeDocument().Cut013.Base = App.activeDocument().Cut012
+App.activeDocument().Cut013.Tool = App.activeDocument().Cylinder012
+#Gui.activeDocument().hide("Cut012")
+#Gui.activeDocument().hide("Cylinder012")
+#Gui.ActiveDocument.Cut013.ShapeColor=Gui.ActiveDocument.Cut012.ShapeColor
+#Gui.ActiveDocument.Cut013.DisplayMode=Gui.ActiveDocument.Cut012.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut014")
+App.activeDocument().Cut014.Base = App.activeDocument().Cut013
+App.activeDocument().Cut014.Tool = App.activeDocument().Cylinder013
+#Gui.activeDocument().hide("Cut013")
+#Gui.activeDocument().hide("Cylinder013")
+#Gui.ActiveDocument.Cut014.ShapeColor=Gui.ActiveDocument.Cut013.ShapeColor
+#Gui.ActiveDocument.Cut014.DisplayMode=Gui.ActiveDocument.Cut013.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut015")
+App.activeDocument().Cut015.Base = App.activeDocument().Cut014
+App.activeDocument().Cut015.Tool = App.activeDocument().Cylinder014
+#Gui.activeDocument().hide("Cut014")
+#Gui.activeDocument().hide("Cylinder014")
+#Gui.ActiveDocument.Cut015.ShapeColor=Gui.ActiveDocument.Cut014.ShapeColor
+#Gui.ActiveDocument.Cut015.DisplayMode=Gui.ActiveDocument.Cut014.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut016")
+App.activeDocument().Cut016.Base = App.activeDocument().Cut015
+App.activeDocument().Cut016.Tool = App.activeDocument().Cylinder015
+#Gui.activeDocument().hide("Cut015")
+#Gui.activeDocument().hide("Cylinder015")
+#Gui.ActiveDocument.Cut016.ShapeColor=Gui.ActiveDocument.Cut015.ShapeColor
+#Gui.ActiveDocument.Cut016.DisplayMode=Gui.ActiveDocument.Cut015.DisplayMode
+#Gui.activeDocument().activeView().viewAxonometric()
+#Gui.activeDocument().activeView().viewAxonometric()
+#Gui.SendMsgToActiveView("ViewFit")
+#Gui.activeDocument().activeView().viewFront()
+#Gui.activeDocument().activeView().viewRear()
+#Gui.activeDocument().activeView().viewFront()
+#Gui.activeDocument().activeView().viewAxonometric()
+#Gui.SendMsgToActiveView("Save")
+App.getDocument("MCL001").save()
+App.ActiveDocument.addObject("Part::Cylinder","Cylinder")
+App.ActiveDocument.ActiveObject.Label = "Cilindro"
+App.ActiveDocument.recompute()
+#Gui.SendMsgToActiveView("ViewFit")
+#Gui.ActiveDocument.setEdit('Cylinder016',0)
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Placement = App.Placement(App.Vector(0,0,2),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Placement = App.Placement(App.Vector(0,0,22),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Placement = App.Placement(App.Vector(0,0,220),App.Rotation(App.Vector(1,0,0),270))
+#Gui.SendMsgToActiveView("ViewFit")
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Placement = App.Placement(App.Vector(1,0,220),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Placement = App.Placement(App.Vector(12,0,220),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Placement = App.Placement(App.Vector(120,0,220),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("MCL001").getObject("Cylinder017").Placement = App.Placement(App.Vector(5,0,220),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder017").Placement = App.Placement(App.Vector(54,0,220),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder017").Placement = App.Placement(App.Vector(540,0,220),App.Rotation(App.Vector(-1,0,0),90))
+#Gui.SendMsgToActiveView("ViewFit")
+FreeCAD.getDocument("MCL001").getObject("Cylinder018").Placement = App.Placement(App.Vector(120,0,2),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder018").Placement = App.Placement(App.Vector(120,0,28),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder018").Placement = App.Placement(App.Vector(120,0,285),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder019").Placement = App.Placement(App.Vector(540,0,2),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder019").Placement = App.Placement(App.Vector(540,0,28),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder019").Placement = App.Placement(App.Vector(540,0,285),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Radius = '3 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Radius = '4 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Radius = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Radius = '6 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Radius = '7 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Height = '9 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder016").Height = '8 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder017").Height = '9 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder017").Height = '8 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder017").Radius = '3 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder017").Radius = '4 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder017").Radius = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder017").Radius = '6 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder017").Radius = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder018").Radius = '3 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder018").Radius = '4 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder018").Radius = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder018").Height = '9 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder018").Height = '8 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder019").Radius = '3 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder019").Radius = '4 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder019").Radius = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder019").Radius = '6 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder019").Radius = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder019").Height = '9 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder019").Height = '8 mm'
+FreeCAD.getDocument("MCL001").getObject("Cylinder020").Placement = App.Placement(App.Vector(120,0,3),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder020").Placement = App.Placement(App.Vector(120,0,35),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder020").Placement = App.Placement(App.Vector(120,0,350),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder021").Placement = App.Placement(App.Vector(540,0,3),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder021").Placement = App.Placement(App.Vector(540,0,35),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder021").Placement = App.Placement(App.Vector(540,0,350),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder022").Placement = App.Placement(App.Vector(540,0,4),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder022").Placement = App.Placement(App.Vector(540,0,41),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder022").Placement = App.Placement(App.Vector(540,0,415),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder023").Placement = App.Placement(App.Vector(120,0,4),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder023").Placement = App.Placement(App.Vector(120,0,41),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder023").Placement = App.Placement(App.Vector(120,0,415),App.Rotation(App.Vector(-1,0,0),90))
+#Gui.SendMsgToActiveView("Save")
+App.getDocument("MCL001").save()
+FreeCAD.getDocument("MCL001").getObject("Cylinder024").Placement = App.Placement(App.Vector(540,0,4),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder024").Placement = App.Placement(App.Vector(540,0,48),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder024").Placement = App.Placement(App.Vector(540,0,480),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder025").Placement = App.Placement(App.Vector(120,0,4),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder025").Placement = App.Placement(App.Vector(120,0,48),App.Rotation(App.Vector(-1,0,0),90))
+FreeCAD.getDocument("MCL001").getObject("Cylinder025").Placement = App.Placement(App.Vector(120,0,480),App.Rotation(App.Vector(-1,0,0),90))
+App.activeDocument().addObject("Part::Cut","Cut017")
+App.activeDocument().Cut017.Base = App.activeDocument().Cut016
+App.activeDocument().Cut017.Tool = App.activeDocument().Cylinder016
+#Gui.activeDocument().hide("Cut016")
+#Gui.activeDocument().hide("Cylinder016")
+#Gui.ActiveDocument.Cut017.ShapeColor=Gui.ActiveDocument.Cut016.ShapeColor
+#Gui.ActiveDocument.Cut017.DisplayMode=Gui.ActiveDocument.Cut016.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut018")
+App.activeDocument().Cut018.Base = App.activeDocument().Cut017
+App.activeDocument().Cut018.Tool = App.activeDocument().Cylinder017
+#Gui.activeDocument().hide("Cut017")
+#Gui.activeDocument().hide("Cylinder017")
+#Gui.ActiveDocument.Cut018.ShapeColor=Gui.ActiveDocument.Cut017.ShapeColor
+#Gui.ActiveDocument.Cut018.DisplayMode=Gui.ActiveDocument.Cut017.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut019")
+App.activeDocument().Cut019.Base = App.activeDocument().Cut018
+App.activeDocument().Cut019.Tool = App.activeDocument().Cylinder018
+#Gui.activeDocument().hide("Cut018")
+#Gui.activeDocument().hide("Cylinder018")
+#Gui.ActiveDocument.Cut019.ShapeColor=Gui.ActiveDocument.Cut018.ShapeColor
+#Gui.ActiveDocument.Cut019.DisplayMode=Gui.ActiveDocument.Cut018.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut020")
+App.activeDocument().Cut020.Base = App.activeDocument().Cut019
+App.activeDocument().Cut020.Tool = App.activeDocument().Cylinder019
+#Gui.activeDocument().hide("Cut019")
+#Gui.activeDocument().hide("Cylinder019")
+#Gui.ActiveDocument.Cut020.ShapeColor=Gui.ActiveDocument.Cut019.ShapeColor
+#Gui.ActiveDocument.Cut020.DisplayMode=Gui.ActiveDocument.Cut019.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut021")
+App.activeDocument().Cut021.Base = App.activeDocument().Cut020
+App.activeDocument().Cut021.Tool = App.activeDocument().Cylinder020
+#Gui.activeDocument().hide("Cut020")
+#Gui.activeDocument().hide("Cylinder020")
+#Gui.ActiveDocument.Cut021.ShapeColor=Gui.ActiveDocument.Cut020.ShapeColor
+#Gui.ActiveDocument.Cut021.DisplayMode=Gui.ActiveDocument.Cut020.DisplayMode
+App.activeDocument().addObject("Part::Fuse","Fusion")
+App.activeDocument().Fusion.Base = App.activeDocument().Cut021
+App.activeDocument().Fusion.Tool = App.activeDocument().Cylinder021
+#Gui.activeDocument().hide("Cut021")
+#Gui.activeDocument().hide("Cylinder021")
+#Gui.ActiveDocument.Fusion.ShapeColor=Gui.ActiveDocument.Cut021.ShapeColor
+#Gui.ActiveDocument.Fusion.DisplayMode=Gui.ActiveDocument.Cut021.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut022")
+App.activeDocument().Cut022.Base = App.activeDocument().Cut021
+App.activeDocument().Cut022.Tool = App.activeDocument().Cylinder021
+#Gui.activeDocument().hide("Cut021")
+#Gui.activeDocument().hide("Cylinder021")
+#Gui.ActiveDocument.Cut022.ShapeColor=Gui.ActiveDocument.Cut021.ShapeColor
+#Gui.ActiveDocument.Cut022.DisplayMode=Gui.ActiveDocument.Cut021.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut023")
+App.activeDocument().Cut023.Base = App.activeDocument().Cut022
+App.activeDocument().Cut023.Tool = App.activeDocument().Cylinder022
+#Gui.activeDocument().hide("Cut022")
+#Gui.activeDocument().hide("Cylinder022")
+#Gui.ActiveDocument.Cut023.ShapeColor=Gui.ActiveDocument.Cut022.ShapeColor
+#Gui.ActiveDocument.Cut023.DisplayMode=Gui.ActiveDocument.Cut022.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut024")
+App.activeDocument().Cut024.Base = App.activeDocument().Cut023
+App.activeDocument().Cut024.Tool = App.activeDocument().Cylinder023
+#Gui.activeDocument().hide("Cut023")
+#Gui.activeDocument().hide("Cylinder023")
+#Gui.ActiveDocument.Cut024.ShapeColor=Gui.ActiveDocument.Cut023.ShapeColor
+#Gui.ActiveDocument.Cut024.DisplayMode=Gui.ActiveDocument.Cut023.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut025")
+App.activeDocument().Cut025.Base = App.activeDocument().Cut024
+App.activeDocument().Cut025.Tool = App.activeDocument().Cylinder024
+#Gui.activeDocument().hide("Cut024")
+#Gui.activeDocument().hide("Cylinder024")
+#Gui.ActiveDocument.Cut025.ShapeColor=Gui.ActiveDocument.Cut024.ShapeColor
+#Gui.ActiveDocument.Cut025.DisplayMode=Gui.ActiveDocument.Cut024.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut026")
+App.activeDocument().Cut026.Base = App.activeDocument().Cut025
+App.activeDocument().Cut026.Tool = App.activeDocument().Cylinder025
+#Gui.activeDocument().hide("Cut025")
+#Gui.activeDocument().hide("Cylinder025")
+#Gui.ActiveDocument.Cut026.ShapeColor=Gui.ActiveDocument.Cut025.ShapeColor
+#Gui.ActiveDocument.Cut026.DisplayMode=Gui.ActiveDocument.Cut025.DisplayMode
+#Gui.SendMsgToActiveView("ViewFit")
+#Gui.SendMsgToActiveView("Save")
+App.getDocument("MCL001").save()
+#Gui.SendMsgToActiveView("Save")
+App.getDocument("MCL001").save()
+App.closeDocument("MCL001")
+#App.setActiveDocument("")
+#App.ActiveDocument=None
+#Gui.ActiveDocument=None
+FreeCAD.open(u"C:/Users/Jorge/Documents/FreeCAD/Materiais/Cozinhas/MCL001.FCStd")
+#App.setActiveDocument("MCL001")
+#App.ActiveDocument=App.getDocument("MCL001")
+#Gui.ActiveDocument=Gui.getDocument("MCL001")
+#Gui.SendMsgToActiveView("SaveAs")
+App.getDocument("MCL001").saveAs(u"C:/Users/Jorge/Documents/FreeCAD/Materiais/Cozinhas/MCL004.FCStd")
+#Gui.ActiveDocument.setEdit('Box',0)
+#Gui.SendMsgToActiveView("ViewFit")
+FreeCAD.getDocument("MCL001").getObject("Box").Width = '8 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Height = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Height = '58 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Height = '584 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Length = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Length = '58 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Length = '584 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Height = '6 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Height = '68 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Height = '684 mm'
+#Gui.SendMsgToActiveView("Save")
+App.getDocument("MCL001").save()
+# Macro End: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\a.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++

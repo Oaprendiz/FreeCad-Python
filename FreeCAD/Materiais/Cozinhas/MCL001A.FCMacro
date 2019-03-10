@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+
+# Macro Begin: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\MCL001A.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++
+import FreeCAD
+import Part
+
+FreeCAD.open(u"C:/Users/Jorge/Documents/FreeCAD/Materiais/Cozinhas/MCL002.FCStd")
+#App.setActiveDocument("MCL002")
+#App.ActiveDocument=App.getDocument("MCL002")
+#Gui.ActiveDocument=Gui.getDocument("MCL002")
+App.activeDocument().addObject("Part::Cut","Cut001")
+App.activeDocument().Cut001.Base = App.activeDocument().Cut
+App.activeDocument().Cut001.Tool = App.activeDocument().Cylinder
+#Gui.activeDocument().hide("Cut")
+#Gui.activeDocument().hide("Cylinder")
+#Gui.ActiveDocument.Cut001.ShapeColor=Gui.ActiveDocument.Cut.ShapeColor
+#Gui.ActiveDocument.Cut001.DisplayMode=Gui.ActiveDocument.Cut.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut002")
+App.activeDocument().Cut002.Base = App.activeDocument().Cut
+App.activeDocument().Cut002.Tool = App.activeDocument().Cylinder001
+#Gui.activeDocument().hide("Cut")
+#Gui.activeDocument().hide("Cylinder001")
+#Gui.ActiveDocument.Cut002.ShapeColor=Gui.ActiveDocument.Cut.ShapeColor
+#Gui.ActiveDocument.Cut002.DisplayMode=Gui.ActiveDocument.Cut.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut003")
+App.activeDocument().Cut003.Base = App.activeDocument().Cut
+App.activeDocument().Cut003.Tool = App.activeDocument().Cylinder002
+#Gui.activeDocument().hide("Cut")
+#Gui.activeDocument().hide("Cylinder002")
+#Gui.ActiveDocument.Cut003.ShapeColor=Gui.ActiveDocument.Cut.ShapeColor
+#Gui.ActiveDocument.Cut003.DisplayMode=Gui.ActiveDocument.Cut.DisplayMode
+# Macro End: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\MCL001A.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++

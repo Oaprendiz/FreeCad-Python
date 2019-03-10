@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+
+# Macro Begin: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\b.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++
+import FreeCAD
+import __init__
+import circularEdgeConstraint
+import boltMultipleCircularEdges
+import sphericalSurfaceConstraint
+import degreesOfFreedomAnimation
+
+App.newDocument("Sem nome")
+#App.setActiveDocument("Sem_nome")
+#App.ActiveDocument=App.getDocument("Sem_nome")
+#Gui.ActiveDocument=Gui.getDocument("Sem_nome")
+#Gui.ActiveDocument.setEdit('MCL002_01',0)
+FreeCAD.getDocument("Sem_nome").getObject("MCL002_01").Placement = App.Placement(App.Vector(0,0,0),App.Rotation(App.Vector(1,0,0),9))
+FreeCAD.getDocument("Sem_nome").getObject("MCL002_01").Placement = App.Placement(App.Vector(0,0,0),App.Rotation(App.Vector(1,0,0),90))
+#Gui.ActiveDocument.setEdit('MCL002_02',0)
+#Gui.activeDocument().activeView().viewTop()
+#Gui.activeDocument().activeView().viewAxonometric()
+FreeCAD.getDocument("Sem_nome").getObject("MCL002_02").Placement = App.Placement(App.Vector(6.31845,-47.6238,284),App.Rotation(App.Vector(0,0,1),2))
+FreeCAD.getDocument("Sem_nome").getObject("MCL002_02").Placement = App.Placement(App.Vector(6.31845,-47.6238,284),App.Rotation(App.Vector(0,0,1),27))
+FreeCAD.getDocument("Sem_nome").getObject("MCL002_02").Placement = App.Placement(App.Vector(6.31845,-47.6238,284),App.Rotation(App.Vector(0,0,1),270))
+#Gui.activeDocument().activeView().viewAxonometric()
+#Gui.SendMsgToActiveView("ViewFit")
+#Gui.activeDocument().activeView().viewAxonometric()
+#Gui.SendMsgToActiveView("ViewFit")
+# Macro End: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\b.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++

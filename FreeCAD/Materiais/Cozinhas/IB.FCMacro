@@ -1,0 +1,95 @@
+# -*- coding: utf-8 -*-
+
+# Macro Begin: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\IB.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++
+import FreeCAD
+import Part
+
+App.ActiveDocument.addObject("Part::Box","Box")
+App.ActiveDocument.ActiveObject.Label = "Cubo"
+App.ActiveDocument.recompute()
+#Gui.SendMsgToActiveView("ViewFit")
+#Gui.ActiveDocument.setEdit('Box',0)
+FreeCAD.getDocument("Sem_nome").getObject("Box").Length = '5 mm'
+FreeCAD.getDocument("Sem_nome").getObject("Box").Length = '58 mm'
+FreeCAD.getDocument("Sem_nome").getObject("Box").Length = '580 mm'
+FreeCAD.getDocument("Sem_nome").getObject("Box").Width = '1 mm'
+FreeCAD.getDocument("Sem_nome").getObject("Box").Width = '16 mm'
+FreeCAD.getDocument("Sem_nome").getObject("Box").Height = '7 mm'
+FreeCAD.getDocument("Sem_nome").getObject("Box").Height = '70 mm'
+FreeCAD.getDocument("Sem_nome").getObject("Box").Height = '700 mm'
+#Gui.SendMsgToActiveView("ViewFit")
+App.ActiveDocument.addObject("Part::Cylinder","Cylinder")
+App.ActiveDocument.ActiveObject.Label = "Cilindro"
+App.ActiveDocument.recompute()
+#Gui.SendMsgToActiveView("ViewFit")
+#Gui.activeDocument().activeView().viewFront()
+#Gui.activeDocument().activeView().viewLeft()
+#Gui.activeDocument().activeView().viewFront()
+#Gui.activeDocument().activeView().viewAxonometric()
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Height = '1 mm'
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Height = '16 mm'
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Radius = '5 mm'
+#Gui.ActiveDocument.setEdit('Cylinder',0)
+#Gui.ActiveDocument.setEdit('Cylinder',0)
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(17,-1,8),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(18,-1,8),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(19,-1,8),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(20,-1,8),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(5,-1,8),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(50,-1,8),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(50,0,8),App.Rotation(App.Vector(1,0,0),270))
+App.activeDocument().addObject("Part::Cut","Cut")
+App.activeDocument().Cut.Base = App.activeDocument().Cylinder
+App.activeDocument().Cut.Tool = App.activeDocument().Box
+#Gui.activeDocument().hide("Cylinder")
+#Gui.activeDocument().hide("Box")
+#Gui.ActiveDocument.Cut.ShapeColor=Gui.ActiveDocument.Cylinder.ShapeColor
+#Gui.ActiveDocument.Cut.DisplayMode=Gui.ActiveDocument.Cylinder.DisplayMode
+#Gui.SendMsgToActiveView("ViewFit")
+App.activeDocument().addObject("Part::Cut","Cut001")
+App.activeDocument().Cut001.Base = App.activeDocument().Box
+App.activeDocument().Cut001.Tool = App.activeDocument().Cylinder
+#Gui.activeDocument().hide("Box")
+#Gui.activeDocument().hide("Cylinder")
+#Gui.ActiveDocument.Cut001.ShapeColor=Gui.ActiveDocument.Box.ShapeColor
+#Gui.ActiveDocument.Cut001.DisplayMode=Gui.ActiveDocument.Box.DisplayMode
+#Gui.SendMsgToActiveView("ViewFit")
+#Gui.activeDocument().activeView().viewFront()
+App.activeDocument().addObject("Part::Cut","Cut002")
+App.activeDocument().Cut002.Base = App.activeDocument().Box
+App.activeDocument().Cut002.Tool = App.activeDocument().Cylinder
+#Gui.activeDocument().hide("Box")
+#Gui.activeDocument().hide("Cylinder")
+#Gui.ActiveDocument.Cut002.ShapeColor=Gui.ActiveDocument.Box.ShapeColor
+#Gui.ActiveDocument.Cut002.DisplayMode=Gui.ActiveDocument.Box.DisplayMode
+App.getDocument("Sem_nome").removeObject("Cut002")
+App.getDocument("Sem_nome").recompute()
+App.getDocument("Sem_nome").removeObject("Cut001")
+App.getDocument("Sem_nome").recompute()
+#Gui.activeDocument().activeView().viewAxonometric()
+#Gui.SendMsgToActiveView("ViewFit")
+#Gui.activeDocument().activeView().viewAxonometric()
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(16,-1,12),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(16,0,12),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(16,0,8),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(5,0,8),App.Rotation(App.Vector(1,0,0),270))
+FreeCAD.getDocument("Sem_nome").getObject("Cylinder").Placement = App.Placement(App.Vector(50,0,8),App.Rotation(App.Vector(1,0,0),270))
+App.activeDocument().addObject("Part::Fuse","Fusion")
+App.activeDocument().Fusion.Base = App.activeDocument().Box
+App.activeDocument().Fusion.Tool = App.activeDocument().Cylinder
+#Gui.activeDocument().hide("Box")
+#Gui.activeDocument().hide("Cylinder")
+#Gui.ActiveDocument.Fusion.ShapeColor=Gui.ActiveDocument.Box.ShapeColor
+#Gui.ActiveDocument.Fusion.DisplayMode=Gui.ActiveDocument.Box.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut")
+App.activeDocument().Cut.Base = App.activeDocument().Box
+App.activeDocument().Cut.Tool = App.activeDocument().Cylinder
+#Gui.activeDocument().hide("Box")
+#Gui.activeDocument().hide("Cylinder")
+#Gui.ActiveDocument.Cut.ShapeColor=Gui.ActiveDocument.Box.ShapeColor
+#Gui.ActiveDocument.Cut.DisplayMode=Gui.ActiveDocument.Box.DisplayMode
+FreeCAD.getDocument("Sem_nome").getObject("Cut001").Placement = App.Placement(App.Vector(0,-5,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("Sem_nome").getObject("Cut001").Placement = App.Placement(App.Vector(0,-50,0),App.Rotation(App.Vector(0,0,1),0))
+#Gui.activeDocument().activeView().viewAxonometric()
+#Gui.SendMsgToActiveView("ViewFit")
+# Macro End: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\IB.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++

@@ -1,0 +1,147 @@
+# -*- coding: utf-8 -*-
+
+# Macro Begin: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\Ilharga.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++
+import FreeCAD
+import PartDesign
+import PartDesignGui
+import Sketcher
+
+#Gui.activateWorkbench("PartDesignWorkbench")
+App.newDocument("Sem nome")
+#App.setActiveDocument("Sem_nome")
+#App.ActiveDocument=App.getDocument("Sem_nome")
+#Gui.ActiveDocument=Gui.getDocument("Sem_nome")
+App.activeDocument().addObject('PartDesign::Body','Body')
+#Gui.activeView().setActiveObject('pdbody', App.activeDocument().Body)
+App.activeDocument().Body.newObject('Sketcher::SketchObject','Sketch')
+App.activeDocument().Sketch.Support = (App.activeDocument().XZ_Plane, [''])
+App.activeDocument().Sketch.MapMode = 'FlatFace'
+App.ActiveDocument.recompute()
+#Gui.activeDocument().setEdit('Sketch')
+#Gui.activateWorkbench('SketcherWorkbench')
+#ActiveSketch = App.ActiveDocument.getObject('Sketch')
+#tv = Show.TempoVis(App.ActiveDocument)
+#if ActiveSketch.ViewObject.HideDependent:
+#  objs = tv.get_all_dependent(ActiveSketch)
+#  objs = filter(lambda x: not x.TypeId.startswith("TechDraw::"), objs)
+#  objs = filter(lambda x: not x.TypeId.startswith("Drawing::"), objs)
+#  tv.hide(objs)
+#if ActiveSketch.ViewObject.ShowSupport:
+#  tv.show([ref[0] for ref in ActiveSketch.Support if not ref[0].isDerivedFrom("PartDesign::Plane")])
+#if ActiveSketch.ViewObject.ShowLinks:
+#  tv.show([ref[0] for ref in ActiveSketch.ExternalGeometry])
+#tv.hide(ActiveSketch)
+#ActiveSketch.ViewObject.TempoVis = tv
+#del(tv)
+#
+#ActiveSketch = App.ActiveDocument.getObject('Sketch')
+#if ActiveSketch.ViewObject.RestoreCamera:
+#  ActiveSketch.ViewObject.TempoVis.saveCamera()
+#
+geoList = []
+geoList.append(Part.LineSegment(App.Vector(-6.988391,3.744976,0),App.Vector(11.803358,3.744976,0)))
+geoList.append(Part.LineSegment(App.Vector(11.803358,3.744976,0),App.Vector(11.803358,-5.818085,0)))
+geoList.append(Part.LineSegment(App.Vector(11.803358,-5.818085,0),App.Vector(-6.988391,-5.818085,0)))
+geoList.append(Part.LineSegment(App.Vector(-6.988391,-5.818085,0),App.Vector(-6.988391,3.744976,0)))
+App.ActiveDocument.Sketch.addGeometry(geoList,False)
+conList = []
+conList.append(Sketcher.Constraint('Coincident',0,2,1,1))
+conList.append(Sketcher.Constraint('Coincident',1,2,2,1))
+conList.append(Sketcher.Constraint('Coincident',2,2,3,1))
+conList.append(Sketcher.Constraint('Coincident',3,2,0,1))
+conList.append(Sketcher.Constraint('Horizontal',0))
+conList.append(Sketcher.Constraint('Horizontal',2))
+conList.append(Sketcher.Constraint('Vertical',1))
+conList.append(Sketcher.Constraint('Vertical',3))
+App.ActiveDocument.Sketch.addConstraint(conList)
+
+App.ActiveDocument.Sketch.addConstraint(Sketcher.Constraint('DistanceX',0,1,0,2,18.791749)) 
+App.ActiveDocument.Sketch.setDatum(8,App.Units.Quantity('700.000000 mm'))
+App.ActiveDocument.Sketch.addConstraint(Sketcher.Constraint('DistanceY',3,1,3,2,9.563061)) 
+App.ActiveDocument.Sketch.setDatum(9,App.Units.Quantity('700.000000 mm'))
+App.ActiveDocument.Sketch.setDatum(8,App.Units.Quantity('580.000000 mm'))
+App.ActiveDocument.Sketch.addConstraint(Sketcher.Constraint('Symmetric',0,1,-1,1,0,2)) 
+App.ActiveDocument.Sketch.addConstraint(Sketcher.Constraint('Symmetric',0,1,0,2,-2)) 
+App.ActiveDocument.Sketch.addConstraint(Sketcher.Constraint('Symmetric',0,1,2,2,-1)) 
+#Gui.activeDocument().activeView().viewAxonometric()
+#Gui.getDocument('Sem_nome').resetEdit()
+#ActiveSketch = App.ActiveDocument.getObject('Sketch')
+#tv = ActiveSketch.ViewObject.TempoVis
+#if tv:
+#  tv.restore()
+#ActiveSketch.ViewObject.TempoVis = None
+#del(tv)
+#
+#Gui.activateWorkbench('PartDesignWorkbench')
+App.getDocument('Sem_nome').recompute()
+App.activeDocument().Body.newObject("PartDesign::Pad","Pad")
+App.activeDocument().Pad.Profile = App.activeDocument().Sketch
+App.activeDocument().Pad.Length = 10.0
+App.ActiveDocument.recompute()
+#Gui.activeDocument().hide("Sketch")
+App.ActiveDocument.recompute()
+#Gui.activeDocument().setEdit('Pad', 0)
+#Gui.Selection.clearSelection()
+#Gui.ActiveDocument.Pad.ShapeColor=Gui.ActiveDocument.Body.ShapeColor
+#Gui.ActiveDocument.Pad.LineColor=Gui.ActiveDocument.Body.LineColor
+#Gui.ActiveDocument.Pad.PointColor=Gui.ActiveDocument.Body.PointColor
+#Gui.ActiveDocument.Pad.Transparency=Gui.ActiveDocument.Body.Transparency
+#Gui.ActiveDocument.Pad.DisplayMode=Gui.ActiveDocument.Body.DisplayMode
+#Gui.activeDocument().hide("Sketch")
+App.ActiveDocument.Pad.Length = 16.000000
+App.ActiveDocument.Pad.Length2 = 100.000000
+App.ActiveDocument.Pad.Type = 0
+App.ActiveDocument.Pad.UpToFace = None
+App.ActiveDocument.Pad.Reversed = 0
+App.ActiveDocument.Pad.Midplane = 0
+App.ActiveDocument.Pad.Offset = 0.000000
+App.ActiveDocument.recompute()
+#Gui.activeDocument().resetEdit()
+#Gui.activeDocument().activeView().viewAxonometric()
+#Gui.activateWorkbench('SketcherWorkbench')
+#ActiveSketch = App.ActiveDocument.getObject('Sketch')
+#tv = Show.TempoVis(App.ActiveDocument)
+#if ActiveSketch.ViewObject.HideDependent:
+#  objs = tv.get_all_dependent(ActiveSketch)
+#  objs = filter(lambda x: not x.TypeId.startswith("TechDraw::"), objs)
+#  objs = filter(lambda x: not x.TypeId.startswith("Drawing::"), objs)
+#  tv.hide(objs)
+#if ActiveSketch.ViewObject.ShowSupport:
+#  tv.show([ref[0] for ref in ActiveSketch.Support if not ref[0].isDerivedFrom("PartDesign::Plane")])
+#if ActiveSketch.ViewObject.ShowLinks:
+#  tv.show([ref[0] for ref in ActiveSketch.ExternalGeometry])
+#tv.hide(ActiveSketch)
+#ActiveSketch.ViewObject.TempoVis = tv
+#del(tv)
+#
+#ActiveSketch = App.ActiveDocument.getObject('Sketch')
+#if ActiveSketch.ViewObject.RestoreCamera:
+#  ActiveSketch.ViewObject.TempoVis.saveCamera()
+#
+#Gui.getDocument('Sem_nome').resetEdit()
+#ActiveSketch = App.ActiveDocument.getObject('Sketch')
+#tv = ActiveSketch.ViewObject.TempoVis
+#if tv:
+#  tv.restore()
+#ActiveSketch.ViewObject.TempoVis = None
+#del(tv)
+#
+#Gui.activateWorkbench('PartDesignWorkbench')
+App.getDocument('Sem_nome').recompute()
+#Gui.activeDocument().setEdit('Pad',0)
+#Gui.activeDocument().hide("Sketch")
+App.ActiveDocument.Pad.Length = 16.000000
+App.ActiveDocument.Pad.Length2 = 100.000000
+App.ActiveDocument.Pad.Type = 0
+App.ActiveDocument.Pad.UpToFace = None
+App.ActiveDocument.Pad.Reversed = 0
+App.ActiveDocument.Pad.Midplane = 1
+App.ActiveDocument.Pad.Offset = 0.000000
+App.ActiveDocument.recompute()
+#Gui.activeDocument().resetEdit()
+App.activeDocument().Body.newObject('PartDesign::Plane','DatumPlane')
+App.activeDocument().DatumPlane.Support = [(App.getDocument('Sem_nome').Pad,'Face2')]
+App.activeDocument().DatumPlane.MapMode = 'FlatFace'
+App.activeDocument().recompute()
+#Gui.activeDocument().setEdit('DatumPlane')
+# Macro End: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\Ilharga.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++

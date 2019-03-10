@@ -1,0 +1,133 @@
+# -*- coding: utf-8 -*-
+
+# Macro Begin: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\MCL002.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++
+import FreeCAD
+import Part
+
+FreeCAD.open(u"C:/Users/Jorge/Documents/FreeCAD/Materiais/Cozinhas/MCL001.FCStd")
+#App.setActiveDocument("MCL001")
+#App.ActiveDocument=App.getDocument("MCL001")
+#Gui.ActiveDocument=Gui.getDocument("MCL001")
+#Gui.SendMsgToActiveView("SaveAs")
+App.getDocument("MCL001").saveAs(u"C:/Users/Jorge/Documents/FreeCAD/Materiais/Cozinhas/MCL002.FCStd")
+#Gui.activeDocument().activeView().viewBottom()
+#Gui.activeDocument().activeView().viewLeft()
+#Gui.activeDocument().activeView().viewAxonometric()
+FreeCAD.getDocument("MCL001").getObject("Box").Height = '56 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Height = '568 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Length = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Length = '50 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Length = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Length = '58 mm'
+FreeCAD.getDocument("MCL001").getObject("Box").Length = '580 mm'
+App.ActiveDocument.addObject("Part::Box","Box")
+App.ActiveDocument.ActiveObject.Label = "Cubo"
+App.ActiveDocument.recompute()
+#Gui.SendMsgToActiveView("ViewFit")
+FreeCAD.getDocument("MCL001").getObject("Box001").Width = '1 mm'
+FreeCAD.getDocument("MCL001").getObject("Box001").Width = '16 mm'
+FreeCAD.getDocument("MCL001").getObject("Box001").Length = '8 mm'
+FreeCAD.getDocument("MCL001").getObject("Box001").Height = '5 mm'
+FreeCAD.getDocument("MCL001").getObject("Box001").Height = '56 mm'
+FreeCAD.getDocument("MCL001").getObject("Box001").Height = '568 mm'
+FreeCAD.getDocument("MCL001").getObject("Box001").Placement = App.Placement(App.Vector(1,0,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Box001").Placement = App.Placement(App.Vector(16,0,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Box001").Width = '8 mm'
+#Gui.SendMsgToActiveView("Save")
+App.getDocument("MCL001").save()
+App.activeDocument().addObject("Part::Cut","Cut")
+App.activeDocument().Cut.Base = App.activeDocument().Box001
+App.activeDocument().Cut.Tool = App.activeDocument().Box
+#Gui.activeDocument().hide("Box001")
+#Gui.activeDocument().hide("Box")
+#Gui.ActiveDocument.Cut.ShapeColor=Gui.ActiveDocument.Box001.ShapeColor
+#Gui.ActiveDocument.Cut.DisplayMode=Gui.ActiveDocument.Box001.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut")
+App.activeDocument().Cut.Base = App.activeDocument().Box
+App.activeDocument().Cut.Tool = App.activeDocument().Box001
+#Gui.activeDocument().hide("Box")
+#Gui.activeDocument().hide("Box001")
+#Gui.ActiveDocument.Cut.ShapeColor=Gui.ActiveDocument.Box.ShapeColor
+#Gui.ActiveDocument.Cut.DisplayMode=Gui.ActiveDocument.Box.DisplayMode
+#Gui.SendMsgToActiveView("ViewSelection")
+App.ActiveDocument.addObject("Part::Cylinder","Cylinder")
+App.ActiveDocument.ActiveObject.Label = "Cilindro"
+App.ActiveDocument.recompute()
+#Gui.SendMsgToActiveView("ViewFit")
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(5,0,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(56,0,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(568,0,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(56,0,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(5,0,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(58,0,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(580,0,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(580,8,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(5,8,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(52,8,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,0),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,5),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,56),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,568),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(3,8,568),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(30,8,568),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,568),App.Rotation(App.Vector(0,0,1),0))
+#Gui.activeDocument().activeView().viewFront()
+#Gui.activeDocument().activeView().viewAxonometric()
+#Gui.activeDocument().activeView().viewAxonometric()
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(1,8,568),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(10,8,568),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,568),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,68),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,468),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,46),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,469),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,69),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,569),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,568),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,567),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,566),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,565),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,564),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,563),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,562),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,561),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,560),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,559),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder002").Placement = App.Placement(App.Vector(100,8,558),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,567),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,566),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,565),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,564),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,563),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,562),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,561),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,560),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,559),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder001").Placement = App.Placement(App.Vector(300,8,558),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,567),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,566),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,565),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,564),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,563),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,562),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,561),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,560),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,559),App.Rotation(App.Vector(0,0,1),0))
+FreeCAD.getDocument("MCL001").getObject("Cylinder").Placement = App.Placement(App.Vector(520,8,558),App.Rotation(App.Vector(0,0,1),0))
+#Gui.SendMsgToActiveView("Save")
+App.getDocument("MCL001").save()
+App.activeDocument().addObject("Part::Fuse","Fusion")
+App.activeDocument().Fusion.Base = App.activeDocument().Cut
+App.activeDocument().Fusion.Tool = App.activeDocument().Cylinder
+#Gui.activeDocument().hide("Cut")
+#Gui.activeDocument().hide("Cylinder")
+#Gui.ActiveDocument.Fusion.ShapeColor=Gui.ActiveDocument.Cut.ShapeColor
+#Gui.ActiveDocument.Fusion.DisplayMode=Gui.ActiveDocument.Cut.DisplayMode
+App.activeDocument().addObject("Part::Cut","Cut001")
+App.activeDocument().Cut001.Base = App.activeDocument().Cut
+App.activeDocument().Cut001.Tool = App.activeDocument().Cylinder
+#Gui.activeDocument().hide("Cut")
+#Gui.activeDocument().hide("Cylinder")
+#Gui.ActiveDocument.Cut001.ShapeColor=Gui.ActiveDocument.Cut.ShapeColor
+#Gui.ActiveDocument.Cut001.DisplayMode=Gui.ActiveDocument.Cut.DisplayMode
+# Macro End: C:\Users\Jorge\Documents\FreeCAD\Materiais\Cozinhas\MCL002.FCMacro +++++++++++++++++++++++++++++++++++++++++++++++++
