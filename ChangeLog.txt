@@ -6,8 +6,11 @@
      * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
  */
 
+2019-03-11 14:37 UTC Oaprendiz (jorgenunes5+prog gmail.com)
+  * MCL001.py
+    ; preparação para reformulação das rotinas
 
-2017-11-27 21:03 UTC Oaprendiz (jorgenunes5+prog gmail.com)
+2019-03-11 01:03 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   + ChangeLog.txt
   + Pasta FreeCAD
     ; Inicial commit

@@ -5,8 +5,8 @@ def kit0000(nAlt, nLarg, nEsp = nAgl): # Ilharga Base lisa
 	cBox = "Box" + str(nBox).zfill(5)
 	App.ActiveDocument.addObject("Part::Box", cBox)
 	App.ActiveDocument.getObject(cBox).Height = str(nAlt) + ' mm'
-	App.ActiveDocument.getObject(cBox).Width = str(nEsp) + ' mm'
-	App.ActiveDocument.getObject(cBox).Length = str(nLarg) + ' mm'
+	App.ActiveDocument.getObject(cBox).Width = str(nLarg) + ' mm'
+	App.ActiveDocument.getObject(cBox).Length = str(nEsp) + ' mm'
 
 def kit0001(nAlt, nLarg, nEsp = nAgl): # Ilharga Base c/rasgo e furação esq.
 	global nBox, nCut
@@ -18,7 +18,7 @@ def kit0001(nAlt, nLarg, nEsp = nAgl): # Ilharga Base c/rasgo e furação esq.
 	App.ActiveDocument.getObject(cBox).Height = str(nAlt) + ' mm'
 	App.ActiveDocument.getObject(cBox).Width = '8 mm'
 	App.ActiveDocument.getObject(cBox).Length = '8 mm'
-	App.ActiveDocument.getObject(cBox).Placement = App.Placement(App.Vector(51,8,0),App.Rotation(App.Vector(0,0,1),0))
+	App.ActiveDocument.getObject(cBox).Placement = App.Placement(App.Vector(8, nLarg - 51, 0),App.Rotation(App.Vector(0, 0, 1),0))
 	
 	nCut +=1
 	cCut = "Cut" + str(nCut).zfill(5)
@@ -31,12 +31,12 @@ def kit0001(nAlt, nLarg, nEsp = nAgl): # Ilharga Base c/rasgo e furação esq.
 	Gui.ActiveDocument.getObject(cCut).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 	
 	for n in range(0, 5):	# furos p/prateleira
-		kit0003(543, 8, 222 + n * 64)
-		kit0003(120, 8, 222 + n * 64)
+		kit0003(8, 37, 222 + n * 64)
+		kit0003(8, 460, 222 + n * 64)
 
 			# furos p/dobradiças
-	kit0003(543, 8, 78), kit0003(543, 8, 112)
-	kit0003(543, 8, 622), kit0003(543, 8, 590)
+	kit0003(8, 37, 78), kit0003(8, 37, 112)
+	kit0003(8, 37, 622), kit0003(8, 37, 590)
 
 def kit0002(nAlt, nLarg, nEsp = nAgl): # Ilharga Base c/rasgo e furação dir.
 	global nBox, nCut
@@ -75,18 +75,18 @@ def kit0003(x, z, y): # Furo para prateleiras
 	App.ActiveDocument.addObject("Part::Cylinder",cFuro)
 	App.ActiveDocument.getObject(cFuro).Radius = '2,5 mm'
 	App.ActiveDocument.getObject(cFuro).Height = '8 mm'
-	App.ActiveDocument.getObject(cFuro).Placement = App.Placement(App.Vector(x, z, y),App.Rotation(App.Vector(1,0,0),270))
+	App.ActiveDocument.getObject(cFuro).Placement = App.Placement(App.Vector(x, z, y),App.Rotation(App.Vector(0,1,0),90))
 
-	cBase = "Cut" + str(nCut).zfill(5)
-	nCut +=1
-	cCut = "Cut" + str(nCut).zfill(5)
-	App.activeDocument().addObject("Part::Cut", cCut)
-	App.activeDocument().getObject(cCut).Base = App.activeDocument().getObject(cBase)
-	App.activeDocument().getObject(cCut).Tool = App.activeDocument().getObject(cFuro)
-	Gui.activeDocument().hide(cBase)
-	Gui.activeDocument().hide(cFuro)
-	Gui.ActiveDocument.getObject(cCut).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
-	Gui.ActiveDocument.getObject(cCut).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
+#	cBase = "Cut" + str(nCut).zfill(5)
+#	nCut +=1
+#	cCut = "Cut" + str(nCut).zfill(5)
+#	App.activeDocument().addObject("Part::Cut", cCut)
+#	App.activeDocument().getObject(cCut).Base = App.activeDocument().getObject(cBase)
+#	App.activeDocument().getObject(cCut).Tool = App.activeDocument().getObject(cFuro)
+#	Gui.activeDocument().hide(cBase)
+#	Gui.activeDocument().hide(cFuro)
+#	Gui.ActiveDocument.getObject(cCut).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
+#	Gui.ActiveDocument.getObject(cCut).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 
 def kit0004(nAlt, nLarg, nEsp = nAgl): # Topo MB
 	global nBox, nCut
@@ -457,8 +457,8 @@ nFuse = 0
 #kit0100(200) # base (interno) a chamar por outros modulos
 #kit0101(600) # c/prateleira
 #kit0102(500) # gavetas
-kit0103(1200) # LL
-
+#kit0103(1200) # LL
+kit0001(700,580)
 
 
 App.ActiveDocument.recompute()
