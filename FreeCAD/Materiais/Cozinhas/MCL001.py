@@ -1,75 +1,122 @@
 
-def kit0000(nAlt, nLarg, nEsp = nAgl): # Ilharga Base lisa
-	global nBox
-	nBox += 1
-	cBox = "Box" + str(nBox).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cBox)
-	App.ActiveDocument.getObject(cBox).Height = str(nAlt) + ' mm'
-	App.ActiveDocument.getObject(cBox).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cBox).Length = str(nEsp) + ' mm'
+def kit0000(nAlt, nLarg, nEsp = nAgl): # Peça c/medidas livres (elemento básico)
+	global nKit, cKit
+	nKit += 1
+	cKit = "Kit" + str(nKit).zfill(5)
+	App.ActiveDocument.addObject("Part::Box", cKit)
+	App.ActiveDocument.getObject(cKit).Height = str(nAlt) + ' mm'
+	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
+	App.ActiveDocument.getObject(cKit).Length = str(nEsp) + ' mm'
 
-def kit0001(nAlt, nLarg, nEsp = nAgl): # Ilharga Base c/rasgo e furação esq.
-	global nBox, nCut
+def kit0001(nAlt, nLarg, nEsp = nAgl): # Ilharga Base esq. c/rasgo e furação
+	global nKit, cKit
 	kit0000(nAlt, nLarg, nEsp)
-	cBase = "Box" + str(nBox).zfill(5)
-	nBox += 1
-	cBox = "Box" + str(nBox).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cBox)
-	App.ActiveDocument.getObject(cBox).Height = str(nAlt) + ' mm'
-	App.ActiveDocument.getObject(cBox).Width = '8 mm'
-	App.ActiveDocument.getObject(cBox).Length = '8 mm'
-	App.ActiveDocument.getObject(cBox).Placement = App.Placement(App.Vector(8, nLarg - 51, 0),App.Rotation(App.Vector(0, 0, 1),0))
+	kit0050(nAlt, nLarg - 59, 1) # 1 = rasgo vertical direita
+	kit0051(nAlt, 1) # 1 = furos á direita
 	
-	nCut +=1
-	cCut = "Cut" + str(nCut).zfill(5)
-	App.activeDocument().addObject("Part::Cut", cCut)
-	App.activeDocument().getObject(cCut).Base = App.activeDocument().getObject(cBase)
-	App.activeDocument().getObject(cCut).Tool = App.activeDocument().getObject(cBox)
-	Gui.activeDocument().hide(cBase)
-	Gui.activeDocument().hide(cBox)
-	Gui.ActiveDocument.getObject(cCut).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
-	Gui.ActiveDocument.getObject(cCut).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
-	
-	for n in range(0, 5):	# furos p/prateleira
-		kit0003(8, 37, 222 + n * 64)
-		kit0003(8, 460, 222 + n * 64)
+#	for n in range(0, 5):	# furos p/prateleira
+#		kit0053(8, 37, 222 + n * 64)
+#		kit0053(8, 460, 222 + n * 64)
 
-			# furos p/dobradiças
-	kit0003(8, 37, 78), kit0003(8, 37, 112)
-	kit0003(8, 37, 622), kit0003(8, 37, 590)
-
-def kit0002(nAlt, nLarg, nEsp = nAgl): # Ilharga Base c/rasgo e furação dir.
-	global nBox, nCut
+def kit0002(nAlt, nLarg, nEsp = nAgl): # Ilharga Base dir. c/rasgo e furação
+	global nKit, cKit
 	kit0000(nAlt, nLarg, nEsp)
-	cBase = "Box" + str(nBox).zfill(5)
-	nBox += 1
-	cBox = "Box" + str(nBox).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cBox)
-	App.ActiveDocument.getObject(cBox).Height = str(nAlt) + ' mm'
-	App.ActiveDocument.getObject(cBox).Width = '8 mm'
-	App.ActiveDocument.getObject(cBox).Length = '8 mm'
-	App.ActiveDocument.getObject(cBox).Placement = App.Placement(App.Vector(51,0,0),App.Rotation(App.Vector(0,0,1),0))
+	kit0050(nAlt, nLarg - 59, 2) # 2 = rasgo vertical esquerda
+	kit0051(nAlt, 2) # 2 = furos á esquerda
 	
-	nCut +=1
-	cCut = "Cut" + str(nCut).zfill(5)
-	App.activeDocument().addObject("Part::Cut", cCut)
-	App.activeDocument().getObject(cCut).Base = App.activeDocument().getObject(cBase)
-	App.activeDocument().getObject(cCut).Tool = App.activeDocument().getObject(cBox)
-	Gui.activeDocument().hide(cBase)
-	Gui.activeDocument().hide(cBox)
-	Gui.ActiveDocument.getObject(cCut).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
-	Gui.ActiveDocument.getObject(cCut).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
-	
-	for n in range(0, 5):	# furos p/prateleira
-		kit0003(543, 0, 222 + n * 64)
-		kit0003(120, 0, 222 + n * 64)
+#	for n in range(0, 5):	# furos p/prateleira
+#		kit0053(543, 0, 222 + n * 64)
+#		kit0053(120, 0, 222 + n * 64)
 
-			# furos p/dobradiças
-	kit0003(543, 0, 78), kit0003(543, 0, 112)
-	kit0003(543, 0, 622), kit0003(543, 0, 590)
+# ---------------------------------------------------------------------------------------------------
 
-def kit0003(x, z, y): # Furo para prateleiras
-	global nCylinder, nCut
+
+def kit0050(nDim, nDis, nPos = 1): # Rasgo para as costas ou fundo de gavetas
+	if nPos in range(1, 5):
+		global nKit, cKit, nRas_alto, nRas_largo
+		cBase = "Kit" + str(nKit).zfill(5)
+		nKit += 1
+		cKit = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.addObject("Part::Box", cKit)
+		if nPos == 1 or nPos == 2: # vertical trás esq/dir
+			App.ActiveDocument.getObject(cKit).Height = str(nDim) + ' mm'
+			App.ActiveDocument.getObject(cKit).Width = str(nRas_alto) + ' mm'
+			App.ActiveDocument.getObject(cKit).Length = str(nRas_largo) + ' mm'
+			if nPos == 1:
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(nRas_alto, nDis, 0),App.Rotation(App.Vector(0, 0, 1),0))
+			else:
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, nDis, 0),App.Rotation(App.Vector(0,0,1),0))
+		elif nPos == 3 or nPos ==4:
+			print ("horizontal topos e fundos")
+		elif nPos == 5 or nPos ==6:
+			print ("horizontal topos e fundos")
+		cTool = cKit
+		nKit +=1
+		cKit = "Kit" + str(nKit).zfill(5)
+		App.activeDocument().addObject("Part::Cut", cKit)
+		App.activeDocument().getObject(cKit).Base = App.activeDocument().getObject(cBase)
+		App.activeDocument().getObject(cKit).Tool = App.activeDocument().getObject(cTool)
+		Gui.activeDocument().hide(cBase)
+		Gui.activeDocument().hide(cTool)
+		Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
+		Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
+
+def kit0051(nAlt, nPos): # Furo para dobradiças
+	global nKit, cKit, nDis_dob, nDis_Fdob, nDis_Adob
+	if nPos in range(1, 3):
+		nDob = nDis_Adob
+		for n in range(2):
+			cBase = "Kit" + str(nKit).zfill(5)
+			print cBase
+			nKit += 1
+			cKit = "Kit" + str(nKit).zfill(5)
+			print cKit
+			App.ActiveDocument.addObject("Part::Cylinder", cKit)
+			App.ActiveDocument.getObject(cKit).Radius = '2,5 mm'
+			App.ActiveDocument.getObject(cKit).Height = '8 mm'
+			if nPos == 1:
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(8, nDis_dob, nDob),App.Rotation(App.Vector(0, 1, 0),90))
+			else:
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, nDis_dob, nDob),App.Rotation(App.Vector(0,1,),90))
+			nDob += nDis_Fdob
+			cTool = cKit
+			nKit +=1
+			cKit = "Kit" + str(nKit).zfill(5)
+			App.activeDocument().addObject("Part::Cut", cKit)
+			App.activeDocument().getObject(cKit).Base = App.activeDocument().getObject(cBase)
+			App.activeDocument().getObject(cKit).Tool = App.activeDocument().getObject(cTool)
+			Gui.activeDocument().hide(cBase)
+			Gui.activeDocument().hide(cTool)
+			Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
+			Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
+		nDob = nAlt - nDis_Adob
+		for n in range(2):
+			cBase = "Kit" + str(nKit).zfill(5)
+			print cBase
+			nKit += 1
+			cKit = "Kit" + str(nKit).zfill(5)
+			print cKit
+			App.ActiveDocument.addObject("Part::Cylinder", cKit)
+			App.ActiveDocument.getObject(cKit).Radius = '2,5 mm'
+			App.ActiveDocument.getObject(cKit).Height = '8 mm'
+			if nPos == 1:
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(8, nDis_dob, nDob),App.Rotation(App.Vector(0, 1, 0),90))
+			else:
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, nDis_dob, nDob),App.Rotation(App.Vector(0,1,),90))
+			nDob -= nDis_Fdob
+			cTool = cKit
+			nKit +=1
+			cKit = "Kit" + str(nKit).zfill(5)
+			App.activeDocument().addObject("Part::Cut", cKit)
+			App.activeDocument().getObject(cKit).Base = App.activeDocument().getObject(cBase)
+			App.activeDocument().getObject(cKit).Tool = App.activeDocument().getObject(cTool)
+			Gui.activeDocument().hide(cBase)
+			Gui.activeDocument().hide(cTool)
+			Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
+			Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
+
+def kit0052(nAlt, nPos): # Furo para optimização
+	global nCylinder, nKit
 	cFuro = "Cylinder" + str(nCylinder).zfill(5)
 	nCylinder += 1
 	App.ActiveDocument.addObject("Part::Cylinder",cFuro)
@@ -77,101 +124,131 @@ def kit0003(x, z, y): # Furo para prateleiras
 	App.ActiveDocument.getObject(cFuro).Height = '8 mm'
 	App.ActiveDocument.getObject(cFuro).Placement = App.Placement(App.Vector(x, z, y),App.Rotation(App.Vector(0,1,0),90))
 
-#	cBase = "Cut" + str(nCut).zfill(5)
-#	nCut +=1
-#	cCut = "Cut" + str(nCut).zfill(5)
-#	App.activeDocument().addObject("Part::Cut", cCut)
-#	App.activeDocument().getObject(cCut).Base = App.activeDocument().getObject(cBase)
-#	App.activeDocument().getObject(cCut).Tool = App.activeDocument().getObject(cFuro)
+#	cBase = "Kit" + str(nKit).zfill(5)
+#	nKit +=1
+#	cKit = "Kit" + str(nKit).zfill(5)
+#	App.activeDocument().addObject("Part::Cut", cKit)
+#	App.activeDocument().getObject(cKit).Base = App.activeDocument().getObject(cBase)
+#	App.activeDocument().getObject(cKit).Tool = App.activeDocument().getObject(cFuro)
 #	Gui.activeDocument().hide(cBase)
 #	Gui.activeDocument().hide(cFuro)
-#	Gui.ActiveDocument.getObject(cCut).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
-#	Gui.ActiveDocument.getObject(cCut).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
+#	Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
+#	Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
+	print("kit0052")
+
+def kit0053(nQuant, nDis, nAlt, nPos): # Furo para prateleiras
+	global nKit, cKit, nDis_dob, nDis_Fdob, nDis_Adob
+	if nPos in range(1, 3):
+		nPrat = nDis_Adob
+		for n in range(2):
+			cBase = "Kit" + str(nKit).zfill(5)
+			print cBase
+			nKit += 1
+			cKit = "Kit" + str(nKit).zfill(5)
+			print cKit
+			App.ActiveDocument.addObject("Part::Cylinder", cKit)
+			App.ActiveDocument.getObject(cKit).Radius = '2,5 mm'
+			App.ActiveDocument.getObject(cKit).Height = '8 mm'
+			if nPos == 1:
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(8, nDis_dob, nPrat),App.Rotation(App.Vector(0, 1, 0),90))
+			else:
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, nDis_dob, nPrat),App.Rotation(App.Vector(0,1,),90))
+			nPrat += nDis_Fdob
+			cTool = cKit
+			nKit +=1
+			cKit = "Kit" + str(nKit).zfill(5)
+			App.activeDocument().addObject("Part::Cut", cKit)
+			App.activeDocument().getObject(cKit).Base = App.activeDocument().getObject(cBase)
+			App.activeDocument().getObject(cKit).Tool = App.activeDocument().getObject(cTool)
+			Gui.activeDocument().hide(cBase)
+			Gui.activeDocument().hide(cTool)
+			Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
+			Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 
 def kit0004(nAlt, nLarg, nEsp = nAgl): # Topo MB
-	global nBox, nCut
-	nBox += 1
-	cBox = "Box" + str(nBox).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cBox)
-	App.ActiveDocument.getObject(cBox).Height = str(nEsp) + ' mm'
-	App.ActiveDocument.getObject(cBox).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cBox).Length = str(nAlt) + ' mm'
-	cBase = "Box" + str(nBox).zfill(5)
-	nBox += 1
-	cBox = "Box" + str(nBox).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cBox)
-	App.ActiveDocument.getObject(cBox).Height = '8 mm'
-	App.ActiveDocument.getObject(cBox).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cBox).Length = '8 mm'
-	App.ActiveDocument.getObject(cBox).Placement = App.Placement(App.Vector(16,0,0),App.Rotation(App.Vector(0,0,1),0))
+	global nKit, nKit
+	nKit += 1
+	cKit = "Kit" + str(nKit).zfill(5)
+	App.ActiveDocument.addObject("Part::Box", cKit)
+	App.ActiveDocument.getObject(cKit).Height = str(nEsp) + ' mm'
+	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
+	App.ActiveDocument.getObject(cKit).Length = str(nAlt) + ' mm'
+	cBase = "Kit" + str(nKit).zfill(5)
+	nKit += 1
+	cKit = "Kit" + str(nKit).zfill(5)
+	App.ActiveDocument.addObject("Part::Box", cKit)
+	App.ActiveDocument.getObject(cKit).Height = '8 mm'
+	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
+	App.ActiveDocument.getObject(cKit).Length = '8 mm'
+	App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(16,0,0),App.Rotation(App.Vector(0,0,1),0))
 	
-	nCut +=1
-	cCut = "Cut" + str(nCut).zfill(5)
-	App.activeDocument().addObject("Part::Cut", cCut)
-	App.activeDocument().getObject(cCut).Base = App.activeDocument().getObject(cBase)
-	App.activeDocument().getObject(cCut).Tool = App.activeDocument().getObject(cBox)
+	nKit +=1
+	cKit = "Kit" + str(nKit).zfill(5)
+	App.activeDocument().addObject("Part::Cut", cKit)
+	App.activeDocument().getObject(cKit).Base = App.activeDocument().getObject(cBase)
+	App.activeDocument().getObject(cKit).Tool = App.activeDocument().getObject(cKit)
 	Gui.activeDocument().hide(cBase)
-	Gui.activeDocument().hide(cBox)
-	Gui.ActiveDocument.getObject(cCut).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
-	Gui.ActiveDocument.getObject(cCut).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
+	Gui.activeDocument().hide(cKit)
+	Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
+	Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 
 def kit0005(nAlt, nLarg, nEsp = nAgl): # Fundo MB
-	global nBox, nCut
-	nBox += 1
-	cBox = "Box" + str(nBox).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cBox)
-	App.ActiveDocument.getObject(cBox).Height = str(nEsp) + ' mm'
-	App.ActiveDocument.getObject(cBox).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cBox).Length = str(nAlt) + ' mm'
-	cBase = "Box" + str(nBox).zfill(5)
-	nBox += 1
-	cBox = "Box" + str(nBox).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cBox)
-	App.ActiveDocument.getObject(cBox).Height = '8 mm'
-	App.ActiveDocument.getObject(cBox).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cBox).Length = '8 mm'
-	App.ActiveDocument.getObject(cBox).Placement = App.Placement(App.Vector(16,0,8),App.Rotation(App.Vector(0,0,1),0))
+	global nKit, nKit
+	nKit += 1
+	cKit = "Kit" + str(nKit).zfill(5)
+	App.ActiveDocument.addObject("Part::Box", cKit)
+	App.ActiveDocument.getObject(cKit).Height = str(nEsp) + ' mm'
+	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
+	App.ActiveDocument.getObject(cKit).Length = str(nAlt) + ' mm'
+	cBase = "Kit" + str(nKit).zfill(5)
+	nKit += 1
+	cKit = "Kit" + str(nKit).zfill(5)
+	App.ActiveDocument.addObject("Part::Box", cKit)
+	App.ActiveDocument.getObject(cKit).Height = '8 mm'
+	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
+	App.ActiveDocument.getObject(cKit).Length = '8 mm'
+	App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(16,0,8),App.Rotation(App.Vector(0,0,1),0))
 	
-	nCut +=1
-	cCut = "Cut" + str(nCut).zfill(5)
-	App.activeDocument().addObject("Part::Cut", cCut)
-	App.activeDocument().getObject(cCut).Base = App.activeDocument().getObject(cBase)
-	App.activeDocument().getObject(cCut).Tool = App.activeDocument().getObject(cBox)
+	nKit +=1
+	cKit = "Kit" + str(nKit).zfill(5)
+	App.activeDocument().addObject("Part::Cut", cKit)
+	App.activeDocument().getObject(cKit).Base = App.activeDocument().getObject(cBase)
+	App.activeDocument().getObject(cKit).Tool = App.activeDocument().getObject(cKit)
 	Gui.activeDocument().hide(cBase)
-	Gui.activeDocument().hide(cBox)
-	Gui.ActiveDocument.getObject(cCut).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
-	Gui.ActiveDocument.getObject(cCut).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
+	Gui.activeDocument().hide(cKit)
+	Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
+	Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 
 def kit0006(nAlt, nLarg, nEsp = nAgl): # Prateleira Base
-	global nBox
-	nBox += 1
-	cBox = "Box" + str(nBox).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cBox)
-	App.ActiveDocument.getObject(cBox).Height = str(nEsp) + ' mm'
-	App.ActiveDocument.getObject(cBox).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cBox).Length = str(nAlt) + ' mm'
+	global nKit
+	nKit += 1
+	cKit = "Kit" + str(nKit).zfill(5)
+	App.ActiveDocument.addObject("Part::Box", cKit)
+	App.ActiveDocument.getObject(cKit).Height = str(nEsp) + ' mm'
+	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
+	App.ActiveDocument.getObject(cKit).Length = str(nAlt) + ' mm'
 
 def kit0007(nAlt, nLarg, nEsp = 8): # Costa Base
-	global nBox
-	nBox += 1
-	cBox = "Box" + str(nBox).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cBox)
-	App.ActiveDocument.getObject(cBox).Height = str(nAlt) + ' mm'
-	App.ActiveDocument.getObject(cBox).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cBox).Length = str(nEsp) + ' mm'
+	global nKit
+	nKit += 1
+	cKit = "Kit" + str(nKit).zfill(5)
+	App.ActiveDocument.addObject("Part::Box", cKit)
+	App.ActiveDocument.getObject(cKit).Height = str(nAlt) + ' mm'
+	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
+	App.ActiveDocument.getObject(cKit).Length = str(nEsp) + ' mm'
 
 def kit0099(nLarg): # Movel Base s/Topo (modelo pada MB's forno e LL
-	global nFuse
+	global nKit
 	kit0001(700, 580)	# ------------------------------------------------ Ilharga esq.
-	cBase = "Cut" + str(nCut).zfill(5)
+	cBase = "Kit" + str(nKit).zfill(5)
 	App.ActiveDocument.recompute()
 	Gui.activeDocument().activeView().viewAxonometric()
 	Gui.SendMsgToActiveView("ViewFit")
 	kit0005(545, nLarg - 32)	# ------------------------------------------------ Base
-	cTool = "Cut" + str(nCut).zfill(5)
+	cTool = "Kit" + str(nKit).zfill(5)
 	App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(35, 16, 0),App.Rotation(App.Vector(0,0,1),0))
-	nFuse += 1
-	cFuse = "Fuse" + str(nFuse).zfill(5)
+	nKit += 1
+	cFuse = "Kit" + str(nKit).zfill(5)
 	App.activeDocument().addObject("Part::Fuse",cFuse)
 	App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 	App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -182,12 +259,12 @@ def kit0099(nLarg): # Movel Base s/Topo (modelo pada MB's forno e LL
 	App.ActiveDocument.recompute()
 	Gui.activeDocument().activeView().viewAxonometric()
 	Gui.SendMsgToActiveView("ViewFit")
-	kit0002(700, 580)	# ------------------------------------------------ Ilharga dir.
-	cBase = "Fuse" + str(nFuse).zfill(5)
-	cTool = "Cut" + str(nCut).zfill(5)
+	kit0050(700, 580)	# ------------------------------------------------ Ilharga dir.
+	cBase = "Kit" + str(nKit).zfill(5)
+	cTool = "Kit" + str(nKit).zfill(5)
 	App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(0, nLarg - 16, 0),App.Rotation(App.Vector(0,0,1),0))
-	nFuse += 1
-	cFuse = "Fuse" + str(nFuse).zfill(5)
+	nKit += 1
+	cFuse = "Kit" + str(nKit).zfill(5)
 	App.activeDocument().addObject("Part::Fuse",cFuse)
 	App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 	App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -200,17 +277,17 @@ def kit0099(nLarg): # Movel Base s/Topo (modelo pada MB's forno e LL
 	Gui.SendMsgToActiveView("ViewFit")
 
 def kit0100(nLarg): # Movel Base s/prateleira (modelo para todos os MB's
-	global nFuse
+	global nKit
 	kit0001(700, 580)	# ------------------------------------------------ Ilharga esq.
-	cBase = "Cut" + str(nCut).zfill(5)
+	cBase = "Kit" + str(nKit).zfill(5)
 	App.ActiveDocument.recompute()
 	Gui.activeDocument().activeView().viewAxonometric()
 	Gui.SendMsgToActiveView("ViewFit")
 	kit0007(684, nLarg - 16)	# ---------------------------------------- Costas
-	cTool = "Box" + str(nBox).zfill(5)
+	cTool = "Kit" + str(nKit).zfill(5)
 	App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(51,8,8),App.Rotation(App.Vector(0,0,1),0))
-	nFuse += 1
-	cFuse = "Fuse" + str(nFuse).zfill(5)
+	nKit += 1
+	cFuse = "Kit" + str(nKit).zfill(5)
 	App.activeDocument().addObject("Part::Fuse",cFuse)
 	App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 	App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -221,12 +298,12 @@ def kit0100(nLarg): # Movel Base s/prateleira (modelo para todos os MB's
 	App.ActiveDocument.recompute()
 	Gui.activeDocument().activeView().viewAxonometric()
 	Gui.SendMsgToActiveView("ViewFit")
-	kit0002(700, 580)	# ------------------------------------------------ Ilharga dir.
-	cBase = "Fuse" + str(nFuse).zfill(5)
-	cTool = "Cut" + str(nCut).zfill(5)
+	kit0050(700, 580)	# ------------------------------------------------ Ilharga dir.
+	cBase = "Kit" + str(nKit).zfill(5)
+	cTool = "Kit" + str(nKit).zfill(5)
 	App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(0, nLarg - 16, 0),App.Rotation(App.Vector(0,0,1),0))
-	nFuse += 1
-	cFuse = "Fuse" + str(nFuse).zfill(5)
+	nKit += 1
+	cFuse = "Kit" + str(nKit).zfill(5)
 	App.activeDocument().addObject("Part::Fuse",cFuse)
 	App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 	App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -238,11 +315,11 @@ def kit0100(nLarg): # Movel Base s/prateleira (modelo para todos os MB's
 	Gui.activeDocument().activeView().viewAxonometric()
 	Gui.SendMsgToActiveView("ViewFit")
 	kit0005(545, nLarg - 32)	# ------------------------------------------------ Base
-	cBase = "Fuse" + str(nFuse).zfill(5)
-	cTool = "Cut" + str(nCut).zfill(5)
+	cBase = "Kit" + str(nKit).zfill(5)
+	cTool = "Kit" + str(nKit).zfill(5)
 	App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(35, 16, 0),App.Rotation(App.Vector(0,0,1),0))
-	nFuse += 1
-	cFuse = "Fuse" + str(nFuse).zfill(5)
+	nKit += 1
+	cFuse = "Kit" + str(nKit).zfill(5)
 	App.activeDocument().addObject("Part::Fuse",cFuse)
 	App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 	App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -254,11 +331,11 @@ def kit0100(nLarg): # Movel Base s/prateleira (modelo para todos os MB's
 	Gui.activeDocument().activeView().viewAxonometric()
 	Gui.SendMsgToActiveView("ViewFit")
 	kit0004(545, nLarg - 32) # -------------------------------------------------- Topo
-	cBase = "Fuse" + str(nFuse).zfill(5)
-	cTool = "Cut" + str(nCut).zfill(5)
+	cBase = "Kit" + str(nKit).zfill(5)
+	cTool = "Kit" + str(nKit).zfill(5)
 	App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(35, 16, 684),App.Rotation(App.Vector(0,0,1),0))
-	nFuse += 1
-	cFuse = "Fuse" + str(nFuse).zfill(5)
+	nKit += 1
+	cFuse = "Kit" + str(nKit).zfill(5)
 	App.activeDocument().addObject("Part::Fuse",cFuse)
 	App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 	App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -272,14 +349,14 @@ def kit0100(nLarg): # Movel Base s/prateleira (modelo para todos os MB's
 
 def kit0101(nLarg): # Movel Base c/prateleira
 	if nLarg in range(300,601,50) + range(700,1201,100):
-		global nFuse
+		global nKit
 		kit0100(nLarg)		# Template MB
 		kit0006(521, nLarg - 32) # -------------------------------------------------- Prateleira
-		cBase = "Fuse" + str(nFuse).zfill(5)
-		cTool = "Box" + str(nBox).zfill(5)
+		cBase = "Kit" + str(nKit).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(59, 16, 353),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -290,7 +367,7 @@ def kit0101(nLarg): # Movel Base c/prateleira
 
 def kit0102(nLarg): # Movel Base gavetas
 	if nLarg in range(300,601,50):
-		global nFuse
+		global nKit
 		kit0100(nLarg)		# Template MB
 		App.ActiveDocument.recompute()
 		Gui.activeDocument().activeView().viewAxonometric()
@@ -298,14 +375,14 @@ def kit0102(nLarg): # Movel Base gavetas
 
 def kit0103(nLarg): # Movel Base lava-louça
 	if nLarg in range(700,1201,100):
-		global nFuse
+		global nKit
 		kit0099(nLarg)
 		kit0000(63, 16, nLarg - 32) # -------------------------------------------------- Regua trazeira superior
-		cBase = "Fuse" + str(nFuse).zfill(5)
-		cTool = "Box" + str(nBox).zfill(5)
+		cBase = "Kit" + str(nKit).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(0, 16, 700 - 63),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -314,11 +391,11 @@ def kit0103(nLarg): # Movel Base lava-louça
 		Gui.ActiveDocument.getObject(cFuse).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
 		Gui.ActiveDocument.getObject(cFuse).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 		kit0000(63, 16, nLarg - 32) # -------------------------------------------------- Regua trazeira inferior
-		cBase = "Fuse" + str(nFuse).zfill(5)
-		cTool = "Box" + str(nBox).zfill(5)
+		cBase = "Kit" + str(nKit).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(0, 16, 16),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -327,11 +404,11 @@ def kit0103(nLarg): # Movel Base lava-louça
 		Gui.ActiveDocument.getObject(cFuse).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
 		Gui.ActiveDocument.getObject(cFuse).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 		kit0000(63, 16, nLarg - 32) # -------------------------------------------------- Regua dianteira
-		cBase = "Fuse" + str(nFuse).zfill(5)
-		cTool = "Box" + str(nBox).zfill(5)
+		cBase = "Kit" + str(nKit).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(580 - 16, 16, 700 - 63),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -343,17 +420,17 @@ def kit0103(nLarg): # Movel Base lava-louça
 
 def kit0104(nLarg): # Movel Base Forno
 	if nLarg == 600:
-		global nFuse
+		global nKit
 		kit0001(700, 580)	# ------------------------------------------------ Ilharga esq.
-		cBase = "Cut" + str(nCut).zfill(5)
+		cBase = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.recompute()
 		Gui.activeDocument().activeView().viewAxonometric()
 		Gui.SendMsgToActiveView("ViewFit")
 		kit0005(545, nLarg - 32)	# ------------------------------------------------ Base
-		cTool = "Cut" + str(nCut).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(35, 16, 0),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -364,12 +441,12 @@ def kit0104(nLarg): # Movel Base Forno
 		App.ActiveDocument.recompute()
 		Gui.activeDocument().activeView().viewAxonometric()
 		Gui.SendMsgToActiveView("ViewFit")
-		kit0002(700, 580)	# ------------------------------------------------ Ilharga dir.
-		cBase = "Fuse" + str(nFuse).zfill(5)
-		cTool = "Cut" + str(nCut).zfill(5)
+		kit0050(700, 580)	# ------------------------------------------------ Ilharga dir.
+		cBase = "Kit" + str(nKit).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(0, nLarg - 16, 0),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -381,11 +458,11 @@ def kit0104(nLarg): # Movel Base Forno
 		Gui.activeDocument().activeView().viewAxonometric()
 		Gui.SendMsgToActiveView("ViewFit")
 		kit0000(65, 521) # -------------------------------------------------- Regua p/Prateleira esq.
-		cBase = "Fuse" + str(nFuse).zfill(5)
-		cTool = "Box" + str(nBox).zfill(5)
+		cBase = "Kit" + str(nKit).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(59, 16, 16),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -394,11 +471,11 @@ def kit0104(nLarg): # Movel Base Forno
 		Gui.ActiveDocument.getObject(cFuse).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
 		Gui.ActiveDocument.getObject(cFuse).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 		kit0000(65, 521) # -------------------------------------------------- Regua p/Prateleira dir.
-		cBase = "Fuse" + str(nFuse).zfill(5)
-		cTool = "Box" + str(nBox).zfill(5)
+		cBase = "Kit" + str(nKit).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(59, 568, 16),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -407,12 +484,12 @@ def kit0104(nLarg): # Movel Base Forno
 		Gui.ActiveDocument.getObject(cFuse).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
 		Gui.ActiveDocument.getObject(cFuse).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 		kit0006(521, nLarg - 32) # -------------------------------------------------- Prateleira
-		print cBase, str(nFuse).zfill(5)
-		cBase = "Fuse" + str(nFuse).zfill(5)
-		cTool = "Box" + str(nBox).zfill(5)
+		print cBase, str(nKit).zfill(5)
+		cBase = "Kit" + str(nKit).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(59, 16, 81),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -421,11 +498,11 @@ def kit0104(nLarg): # Movel Base Forno
 		Gui.ActiveDocument.getObject(cFuse).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
 		Gui.ActiveDocument.getObject(cFuse).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 		kit0000(90, 16, nLarg - 32) # -------------------------------------------------- Regua trazeira
-		cBase = "Fuse" + str(nFuse).zfill(5)
-		cTool = "Box" + str(nBox).zfill(5)
+		cBase = "Kit" + str(nKit).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(0, 16, 700 - 90),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -434,11 +511,11 @@ def kit0104(nLarg): # Movel Base Forno
 		Gui.ActiveDocument.getObject(cFuse).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
 		Gui.ActiveDocument.getObject(cFuse).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 		kit0000(19, 38, nLarg - 32) # -------------------------------------------------- Regua dianteira
-		cBase = "Fuse" + str(nFuse).zfill(5)
-		cTool = "Box" + str(nBox).zfill(5)
+		cBase = "Kit" + str(nKit).zfill(5)
+		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(580 - 38, 16, 700 - 19),App.Rotation(App.Vector(0,0,1),0))
-		nFuse += 1
-		cFuse = "Fuse" + str(nFuse).zfill(5)
+		nKit += 1
+		cFuse = "Kit" + str(nKit).zfill(5)
 		App.activeDocument().addObject("Part::Fuse",cFuse)
 		App.activeDocument().getObject(cFuse).Base = App.activeDocument().getObject(cBase)
 		App.activeDocument().getObject(cFuse).Tool = App.activeDocument().getObject(cTool)
@@ -448,24 +525,34 @@ def kit0104(nLarg): # Movel Base Forno
 		Gui.ActiveDocument.getObject(cFuse).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 
 
-nAgl = 16
-nBox = 0
-nCylinder = 0
-nCut = 0
-nFuse = 0
+nKit = 0					# Contagem de elementos
+cKit = 0					# Elemento actual
+nAgl = 16					# Espessura do aglomerado
+nMB_alto = 700				# Altura dos MB's
+nMB_largo = 580				# Profundidade dos MB´s
+nMS_alto1 = 700				# Altura dos MS's normais
+nMS_alto2 = 900				# Altura dos MS's especiais
+nMS_largo = 330				# Profundidade dos MS's
+nRas_alto = 8				# Profundidade dos rasgos para as costas
+nRas_largo = 8				# Largura dos rasgos para as costas
+nDis_dob = 37				# Distancia da frente para as dobradiças
+nDis_Fdob = 32				# Distancia entre furos das dobradiças
+nDis_Adob = 78				# Distancia do primeiro furo da dobradiça
+nDis_prat = 37				# Distancia da frente para as prateleiras
+ndis_Fprat = 64				# Distancia entre furos das prateleiras
+nDis_Aprat = 222			# Distancia do primeiro furo da prateleira
+
 
 #kit0100(200) # base (interno) a chamar por outros modulos
 #kit0101(600) # c/prateleira
 #kit0102(500) # gavetas
 #kit0103(1200) # LL
-kit0001(700,580)
+
+#kit0000(700,580,19)
+#kit0001(700,580)
+kit0002(700,580)
 
 
 App.ActiveDocument.recompute()
 Gui.activeDocument().activeView().viewAxonometric()
 Gui.SendMsgToActiveView("ViewFit")
-
-
-
-
-

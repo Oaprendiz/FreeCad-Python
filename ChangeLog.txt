@@ -6,6 +6,25 @@
      * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
  */
 
+
+2019-03-12 23:36 UTC Oaprendiz (jorgenunes5+prog gmail.com)
+  * MCL001.py
+    ; reformulação das rotinas
+	; kit0000(nAlt, nLarg, nEsp = nAgl) -> Peça c/medidas livres (elemento básico)
+	; kit0001(nAlt, nLarg, nEsp = nAgl) -> Ilharga Base esq. c/rasgo e furação
+	; kit0002(nAlt, nLarg, nEsp = nAgl) -> Ilharga Base dir. c/rasgo e furação
+	;
+	; kit0050(nDim, nDis, nPos = 1) -> Rasgo para as costas ou fundo de gavetas
+	;									1 - Vertical esq/fundo
+	;									2 - Vertical dir/fundo
+	;									3 - Horizontal topos
+    ; 									4 - Horizontal fundos
+	; kit0051(nAlt, nPos) -> Furo para dobradiças
+	;							1 - Esquerda
+	;							2 - Direita
+	; kit0052(nAlt, nPos): # Furo para optimização
+	; kit0053(nQuant, nPos, nAlt): # Furo para prateleiras
+
 2019-03-11 14:37 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
     ; preparação para reformulação das rotinas
