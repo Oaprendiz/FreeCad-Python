@@ -7,7 +7,7 @@
  */
 
 
-2019-03-12 23:36 UTC Oaprendiz (jorgenunes5+prog gmail.com)
+2019-03-18 22:12 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
     ; reformulação das rotinas
 	; kit0000(nAlt, nLarg, nEsp = nAgl) -> Peça c/medidas livres (elemento básico)
@@ -22,7 +22,7 @@
 	; kit0051(nAlt, nPos) -> Furo para dobradiças
 	;							1 - Esquerda
 	;							2 - Direita
-	; kit0052(nAlt, nPos): # Furo para optimização
+	; kit0052(nAlt, nPos): # Furo para optimização das funções kit0051 e kit0053
 	; kit0053(nQuant, nPos, nAlt): # Furo para prateleiras
 
 2019-03-11 14:37 UTC Oaprendiz (jorgenunes5+prog gmail.com)
