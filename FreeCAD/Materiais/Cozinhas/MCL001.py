@@ -1,3 +1,4 @@
+#exec(open('Z:\GitHub\FreeCad-Python\FreeCAD\Materiais\Cozinhas\MCL001.py').read())
 
 def kit0000(nAlt, nLarg, nEsp = nAgl): # Peça c/medidas livres (elemento básico)
 	global nKit, cKit
@@ -8,25 +9,21 @@ def kit0000(nAlt, nLarg, nEsp = nAgl): # Peça c/medidas livres (elemento básic
 	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
 	App.ActiveDocument.getObject(cKit).Length = str(nEsp) + ' mm'
 
-def kit0001(nAlt, nLarg, nEsp = nAgl): # Ilharga Base esq. c/rasgo e furação
-	global nKit, cKit
+def kit0001(nAlt, nLarg, nPos = 1, nEsp = nAgl): # Ilharga Base c/rasgo e furação para dobradiças
+	global nKit, cKit, nDis_dob
 	kit0000(nAlt, nLarg, nEsp)
-	kit0050(nAlt, nLarg - 59, 1) # 1 = rasgo vertical direita
-	kit0051(nAlt, 1) # 1 = furos á direita
-	
-#	for n in range(0, 5):	# furos p/prateleira
-#		kit0053(8, 37, 222 + n * 64)
-#		kit0053(8, 460, 222 + n * 64)
+	if nPos == 1:
+		kit0050(nAlt, nLarg - 59, 1) # 1 = rasgo vertical direita
+		kit0051(nAlt, 1) # 1 = furos á direita
+	else:
+		kit0050(nAlt, nLarg - 59, 2) # 2 = rasgo vertical esquerda
+		kit0051(nAlt, 2) # 2 = furos á esquerda para dobradiças
 
-def kit0002(nAlt, nLarg, nEsp = nAgl): # Ilharga Base dir. c/rasgo e furação
+def kit0002(nAlt, nLarg, nPos = 1, nEsp = nAgl): # Ilharga Base c/rasgo, furação para dobradiças e prateleiras
 	global nKit, cKit
-	kit0000(nAlt, nLarg, nEsp)
-	kit0050(nAlt, nLarg - 59, 2) # 2 = rasgo vertical esquerda
-	kit0051(nAlt, 2) # 2 = furos á esquerda
-	
-#	for n in range(0, 5):	# furos p/prateleira
-#		kit0053(543, 0, 222 + n * 64)
-#		kit0053(120, 0, 222 + n * 64)
+	kit0001(nAlt, nLarg, nPos, nEsp)
+	kit0053(4, nDis_prat, nMB_alto, nPos)
+	kit0053(4, nDis_prat + 380, nMB_alto, nPos)
 
 # ---------------------------------------------------------------------------------------------------
 
@@ -136,24 +133,22 @@ def kit0052(nAlt, nPos): # Furo para optimização
 #	Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 	print("kit0052")
 
-def kit0053(nQuant, nDis, nAlt, nPos): # Furo para prateleiras
-	global nKit, cKit, nDis_dob, nDis_Fdob, nDis_Adob
+def kit0053(nQuant, nDis = nDis_prat, nAlt = nMB_alto, nPos = 1): # Furo para prateleiras
+	global nKit, cKit, nDis_Fdob, nDis_Aprat
 	if nPos in range(1, 3):
-		nPrat = nDis_Adob
-		for n in range(2):
+		nPrat = nDis_Aprat
+		for n in range(nQuant + 1):
 			cBase = "Kit" + str(nKit).zfill(5)
-			print cBase
 			nKit += 1
 			cKit = "Kit" + str(nKit).zfill(5)
-			print cKit
 			App.ActiveDocument.addObject("Part::Cylinder", cKit)
 			App.ActiveDocument.getObject(cKit).Radius = '2,5 mm'
 			App.ActiveDocument.getObject(cKit).Height = '8 mm'
 			if nPos == 1:
-				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(8, nDis_dob, nPrat),App.Rotation(App.Vector(0, 1, 0),90))
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(8, nDis, nPrat),App.Rotation(App.Vector(0, 1, 0),90))
 			else:
-				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, nDis_dob, nPrat),App.Rotation(App.Vector(0,1,),90))
-			nPrat += nDis_Fdob
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, nDis, nPrat),App.Rotation(App.Vector(0,1,),90))
+			nPrat += ndis_Fprat
 			cTool = cKit
 			nKit +=1
 			cKit = "Kit" + str(nKit).zfill(5)
@@ -550,7 +545,9 @@ nDis_Aprat = 222			# Distancia do primeiro furo da prateleira
 
 #kit0000(700,580,19)
 #kit0001(700,580)
+kit0002(700,580,2)
 kit0002(700,580)
+#kit0003(700,580)
 
 
 App.ActiveDocument.recompute()
