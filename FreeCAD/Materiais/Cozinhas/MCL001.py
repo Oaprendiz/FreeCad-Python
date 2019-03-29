@@ -1,4 +1,52 @@
+# http://miba.juergen-riegel.net/
+# https://www.freecadweb.org/wiki/MIBA
+# https://www.freecadweb.org/wiki/index.php?title=Std_ViewScreenShot
+# https://forum.freecadweb.org/viewtopic.php?t=18340
+# https://www.youtube.com/watch?v=uPoTIBMXr8w
+# https://www.youtube.com/watch?v=2zfzZC-TnmU
+# http://willms.pagesperso-orange.fr/freecad/freecad_tweak.html
+#
+# https://www.youtube.com/watch?v=khOfh303JZQ
+# https://www.youtube.com/watch?v=m94HQP1pC0U
+# https://www.youtube.com/watch?v=sOtgKQTBfYo
+# https://www.youtube.com/watch?v=G6CUp15DdU4
+# https://www.youtube.com/watch?v=gXB6D2yOY80
+# https://www.youtube.com/watch?v=7XcmiZ2s0uI
+# https://www.youtube.com/watch?v=VUlUMWje_qw
+# https://www.youtube.com/watch?v=kkvU3dvMkSI
+# https://www.youtube.com/watch?v=gQvFctA1HNI
+# https://www.youtube.com/watch?v=z3gZEncypG8
+# 
+
+
 #exec(open('Z:\GitHub\FreeCad-Python\FreeCAD\Materiais\Cozinhas\MCL001.py').read())
+
+import os
+
+def exportViewToPNG():
+    '''Exports the current view to a PNG suitable for printing on A4 or Letter.
+       The filename will be e.g. MyProject-view.png in the project directory.'''
+    # Reference: http://www.freecadweb.org/wiki/index.php?title=Std_ViewScreenShot
+
+    # Create an image which fits on an A4 or Letter page at 300dpi, landscape
+    width = 11 * 300    # inside letter
+    height = int(8.26 * 300) # inside A4
+
+    doc = FreeCAD.ActiveDocument
+
+    if not doc.FileName:
+        FreeCAD.Console.PrintError('Must save project first\n')
+        return
+
+    docDir, docFilename = os.path.split(doc.FileName)
+
+    filePrefix = os.path.splitext(docFilename)[0]
+
+    filename = filePrefix + '-view.png'
+    filePath = os.path.join(docDir, filename)
+
+    FreeCAD.Console.PrintMessage("Saving view to %s\n" % filePath)
+    FreeCADGui.ActiveDocument.ActiveView.saveImage(filePath.encode("utf-8"), width, height, 'White')
 
 def kit0000(nAlt, nLarg, nEsp = nAgl): # Peça c/medidas livres (elemento básico)
 	global nKit, cKit
@@ -10,20 +58,37 @@ def kit0000(nAlt, nLarg, nEsp = nAgl): # Peça c/medidas livres (elemento básic
 	App.ActiveDocument.getObject(cKit).Length = str(nEsp) + ' mm'
 
 def kit0001(nAlt, nLarg, nPos = 1, nEsp = nAgl): # Ilharga Base c/rasgo e furação para dobradiças
-	global nKit, cKit, nDis_dob
+#	global nKit, cKit, nDis_dob
 	kit0000(nAlt, nLarg, nEsp)
-	if nPos == 1:
-		kit0050(nAlt, nLarg - 59, 1) # 1 = rasgo vertical direita
-		kit0051(nAlt, 1) # 1 = furos á direita
-	else:
-		kit0050(nAlt, nLarg - 59, 2) # 2 = rasgo vertical esquerda
-		kit0051(nAlt, 2) # 2 = furos á esquerda para dobradiças
+	kit0050(nAlt, nLarg - 59, nPos) # rasgo vertical
+	kit0051(nAlt, nPos)             # furos para dobradiças
 
 def kit0002(nAlt, nLarg, nPos = 1, nEsp = nAgl): # Ilharga Base c/rasgo, furação para dobradiças e prateleiras
 	global nKit, cKit
-	kit0001(nAlt, nLarg, nPos, nEsp)
-	kit0053(4, nDis_prat, nMB_alto, nPos)
-	kit0053(4, nDis_prat + 380, nMB_alto, nPos)
+	kit0001(nAlt, nLarg, nPos, nEsp)             # Ilharga Base
+	kit0053(4, nDis_prat, nMB_alto, nPos)        # Dobradiças
+	kit0053(4, nDis_prat + 380, nMB_alto, nPos)  # Prateleiras
+
+def kit0003(nLarg, nFundo, nPos = 1, nEsp = nAgl): # Topo e Base p/MB
+	global nKit, nKit
+	kit0000(nEsp, nFundo, nLarg)
+	if nPos == 1:
+		kit0050(nLarg, nFundo - 24, 3) # 1 = rasgo horizontal topo
+	else:
+		kit0050(nLarg, nFundo - 24, 4) # 2 = rasgo horizontal base
+
+def kit0004(nAlt, nLarg, nPos = 1, nEsp = nAgl): # Ilharga Base s/rasgo e c/furação para dobradiças
+	global nKit, cKit
+	kit0000(nAlt, nLarg, nEsp)
+	kit0051(nAlt, nPos)             # furos para dobradiças
+
+def kit0005(nAlt, nLarg, nEsp = 8): # Costa Base
+	kit0000(nAlt, nEsp, nLarg)
+
+def kit0006(nLarg, nFundo, nEsp = nAgl): # Prateleira Base
+	kit0000(nEsp, nFundo, nLarg)
+
+
 
 # ---------------------------------------------------------------------------------------------------
 
@@ -40,11 +105,17 @@ def kit0050(nDim, nDis, nPos = 1): # Rasgo para as costas ou fundo de gavetas
 			App.ActiveDocument.getObject(cKit).Width = str(nRas_alto) + ' mm'
 			App.ActiveDocument.getObject(cKit).Length = str(nRas_largo) + ' mm'
 			if nPos == 1:
-				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(nRas_alto, nDis, 0),App.Rotation(App.Vector(0, 0, 1),0))
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, nDis, nRas_alto),App.Rotation(App.Vector(0, 0, 1),0))
 			else:
 				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, nDis, 0),App.Rotation(App.Vector(0,0,1),0))
 		elif nPos == 3 or nPos ==4:
-			print ("horizontal topos e fundos")
+			App.ActiveDocument.getObject(cKit).Height = str(nRas_largo) + ' mm'
+			App.ActiveDocument.getObject(cKit).Width = str(nRas_alto) + ' mm'
+			App.ActiveDocument.getObject(cKit).Length = str(nDim) + ' mm'
+			if nPos == 3:
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, nDis, 0),App.Rotation(App.Vector(0, 0, 1),0))
+			else:
+				App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, nDis, nRas_alto),App.Rotation(App.Vector(0,0,1),0))
 		elif nPos == 5 or nPos ==6:
 			print ("horizontal topos e fundos")
 		cTool = cKit
@@ -64,10 +135,8 @@ def kit0051(nAlt, nPos): # Furo para dobradiças
 		nDob = nDis_Adob
 		for n in range(2):
 			cBase = "Kit" + str(nKit).zfill(5)
-			print cBase
 			nKit += 1
 			cKit = "Kit" + str(nKit).zfill(5)
-			print cKit
 			App.ActiveDocument.addObject("Part::Cylinder", cKit)
 			App.ActiveDocument.getObject(cKit).Radius = '2,5 mm'
 			App.ActiveDocument.getObject(cKit).Height = '8 mm'
@@ -89,10 +158,8 @@ def kit0051(nAlt, nPos): # Furo para dobradiças
 		nDob = nAlt - nDis_Adob
 		for n in range(2):
 			cBase = "Kit" + str(nKit).zfill(5)
-			print cBase
 			nKit += 1
 			cKit = "Kit" + str(nKit).zfill(5)
-			print cKit
 			App.ActiveDocument.addObject("Part::Cylinder", cKit)
 			App.ActiveDocument.getObject(cKit).Radius = '2,5 mm'
 			App.ActiveDocument.getObject(cKit).Height = '8 mm'
@@ -131,7 +198,6 @@ def kit0052(nAlt, nPos): # Furo para optimização
 #	Gui.activeDocument().hide(cFuro)
 #	Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
 #	Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
-	print("kit0052")
 
 def kit0053(nQuant, nDis = nDis_prat, nAlt = nMB_alto, nPos = 1): # Furo para prateleiras
 	global nKit, cKit, nDis_Fdob, nDis_Aprat
@@ -160,77 +226,6 @@ def kit0053(nQuant, nDis = nDis_prat, nAlt = nMB_alto, nPos = 1): # Furo para pr
 			Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
 			Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 
-def kit0004(nAlt, nLarg, nEsp = nAgl): # Topo MB
-	global nKit, nKit
-	nKit += 1
-	cKit = "Kit" + str(nKit).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cKit)
-	App.ActiveDocument.getObject(cKit).Height = str(nEsp) + ' mm'
-	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cKit).Length = str(nAlt) + ' mm'
-	cBase = "Kit" + str(nKit).zfill(5)
-	nKit += 1
-	cKit = "Kit" + str(nKit).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cKit)
-	App.ActiveDocument.getObject(cKit).Height = '8 mm'
-	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cKit).Length = '8 mm'
-	App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(16,0,0),App.Rotation(App.Vector(0,0,1),0))
-	
-	nKit +=1
-	cKit = "Kit" + str(nKit).zfill(5)
-	App.activeDocument().addObject("Part::Cut", cKit)
-	App.activeDocument().getObject(cKit).Base = App.activeDocument().getObject(cBase)
-	App.activeDocument().getObject(cKit).Tool = App.activeDocument().getObject(cKit)
-	Gui.activeDocument().hide(cBase)
-	Gui.activeDocument().hide(cKit)
-	Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
-	Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
-
-def kit0005(nAlt, nLarg, nEsp = nAgl): # Fundo MB
-	global nKit, nKit
-	nKit += 1
-	cKit = "Kit" + str(nKit).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cKit)
-	App.ActiveDocument.getObject(cKit).Height = str(nEsp) + ' mm'
-	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cKit).Length = str(nAlt) + ' mm'
-	cBase = "Kit" + str(nKit).zfill(5)
-	nKit += 1
-	cKit = "Kit" + str(nKit).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cKit)
-	App.ActiveDocument.getObject(cKit).Height = '8 mm'
-	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cKit).Length = '8 mm'
-	App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(16,0,8),App.Rotation(App.Vector(0,0,1),0))
-	
-	nKit +=1
-	cKit = "Kit" + str(nKit).zfill(5)
-	App.activeDocument().addObject("Part::Cut", cKit)
-	App.activeDocument().getObject(cKit).Base = App.activeDocument().getObject(cBase)
-	App.activeDocument().getObject(cKit).Tool = App.activeDocument().getObject(cKit)
-	Gui.activeDocument().hide(cBase)
-	Gui.activeDocument().hide(cKit)
-	Gui.ActiveDocument.getObject(cKit).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
-	Gui.ActiveDocument.getObject(cKit).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
-
-def kit0006(nAlt, nLarg, nEsp = nAgl): # Prateleira Base
-	global nKit
-	nKit += 1
-	cKit = "Kit" + str(nKit).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cKit)
-	App.ActiveDocument.getObject(cKit).Height = str(nEsp) + ' mm'
-	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cKit).Length = str(nAlt) + ' mm'
-
-def kit0007(nAlt, nLarg, nEsp = 8): # Costa Base
-	global nKit
-	nKit += 1
-	cKit = "Kit" + str(nKit).zfill(5)
-	App.ActiveDocument.addObject("Part::Box", cKit)
-	App.ActiveDocument.getObject(cKit).Height = str(nAlt) + ' mm'
-	App.ActiveDocument.getObject(cKit).Width = str(nLarg) + ' mm'
-	App.ActiveDocument.getObject(cKit).Length = str(nEsp) + ' mm'
 
 def kit0099(nLarg): # Movel Base s/Topo (modelo pada MB's forno e LL
 	global nKit
@@ -272,12 +267,9 @@ def kit0099(nLarg): # Movel Base s/Topo (modelo pada MB's forno e LL
 	Gui.SendMsgToActiveView("ViewFit")
 
 def kit0100(nLarg): # Movel Base s/prateleira (modelo para todos os MB's
-	global nKit
-	kit0001(700, 580)	# ------------------------------------------------ Ilharga esq.
+	global nKit, cKit
+	kit0002(700, 580)	# ------------------------------------------------ Ilharga esq.
 	cBase = "Kit" + str(nKit).zfill(5)
-	App.ActiveDocument.recompute()
-	Gui.activeDocument().activeView().viewAxonometric()
-	Gui.SendMsgToActiveView("ViewFit")
 	kit0007(684, nLarg - 16)	# ---------------------------------------- Costas
 	cTool = "Kit" + str(nKit).zfill(5)
 	App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(51,8,8),App.Rotation(App.Vector(0,0,1),0))
@@ -479,7 +471,6 @@ def kit0104(nLarg): # Movel Base Forno
 		Gui.ActiveDocument.getObject(cFuse).ShapeColor=Gui.ActiveDocument.getObject(cBase).ShapeColor
 		Gui.ActiveDocument.getObject(cFuse).DisplayMode=Gui.ActiveDocument.getObject(cBase).DisplayMode
 		kit0006(521, nLarg - 32) # -------------------------------------------------- Prateleira
-		print cBase, str(nKit).zfill(5)
 		cBase = "Kit" + str(nKit).zfill(5)
 		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(59, 16, 81),App.Rotation(App.Vector(0,0,1),0))
@@ -545,11 +536,14 @@ nDis_Aprat = 222			# Distancia do primeiro furo da prateleira
 
 #kit0000(700,580,19)
 #kit0001(700,580)
-kit0002(700,580,2)
-kit0002(700,580)
-#kit0003(700,580)
-
+#kit0002(700,580,2)
+#kit0002(700,580)
+#kit0003(468,545)
+#kit0003(468,545,2)
+#kit0006(700,580)
+kit0100(400)
 
 App.ActiveDocument.recompute()
 Gui.activeDocument().activeView().viewAxonometric()
 Gui.SendMsgToActiveView("ViewFit")
+#exportViewToPNG()

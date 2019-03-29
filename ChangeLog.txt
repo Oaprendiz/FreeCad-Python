@@ -6,14 +6,26 @@
      * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
  */
 
-2019-11-09 10:53 UTC Oaprendiz (jorgenunes5+prog gmail.com)
+2019-03-29 09:55 UTC Oaprendiz (jorgenunes5+prog gmail.com)
+  * MCL001.py
+	% kit0001(nAlt, nLarg, nEsp) -> Ilharga Base dir. c/rasgo e furação p/dobradiças
+	% kit0002(nAlt, nLarg, nEsp) -> Ilharga Base dir. c/rasgo e furação p/dobradiças e prateleiras
+    ;         Comentários
+    + kit0003(nLarg, nFundo, nPos, nEsp): -> Topo e Base p/MB
+	+ kit0004(nAlt, nLarg, nPos, nEsp): -> Ilharga Base s/rasgo e c/furação para dobradiças
+	+ kit0005(nAlt, nLarg, nEsp): -> Costa Base
+	+ kit0006(nLarg, nFundo, nEsp): -> Prateleira Base
+	; kit0050(nDim, nDis, nPos): -> Rasgo para as costas ou fundo de gavetas
+	+         Rasgo para topos e bases
+
+2019-03-09 10:53 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
     ; reformulação das rotinas
-	; kit0002(nAlt, nLarg, nPos, nEsp) -> Ilharga Base c/rasgo e furação p/dobradiças
+	; kit0001(nAlt, nLarg, nPos, nEsp) -> Ilharga Base c/rasgo e furação p/dobradiças
 	; kit0002(nAlt, nLarg, nPos, nEsp) -> Ilharga Base c/rasgo e furação p/dobradiças e prateleiras
 	;         Alterada a ordem dos parametros
 	;
-	; kit0053(nQuant, nDis, nPos, nAlt): # Furo para prateleiras
+	; kit0053(nQuant, nDis, nPos, nAlt): -> Furo para prateleiras
 	;         Alterada a ordem dos parametros
 	;         Pequenas correcções
 
@@ -33,7 +45,7 @@
 	;                           1 - Esquerda
 	;                           2 - Direita
 	; kit0052(nAlt, nPos): # Furo para optimização das funções kit0051 e kit0053
-	; kit0053(nQuant, nPos, nAlt): # Furo para prateleiras
+	; kit0053(nQuant, nPos, nAlt): -> Furo para prateleiras
 
 2019-03-11 14:37 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
