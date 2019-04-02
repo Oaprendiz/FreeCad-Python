@@ -6,46 +6,59 @@
      * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
  */
 
+2019-04-02 UTC Oaprendiz (jorgenunes5+prog gmail.com)
+  * MCL001.py
+    + kit0008(nLarg, nFundo, nPos, nEsp): -> Prateleira Pentagonal
+    + kit0009(nLarg, nFundo, nPos, nEsp): -> Topo e Base Pentagonal
+    * kit0050(nDim, nDis, nPos): -> Rasgo para as costas ou fundo de gavetas
+    ;         correção do rasgo na ilharga esquerda
+    ;         colocar 2o rasgo (rever)
+    + kit0100(nLarg): -> Movel Base s/prateleira (modelo para os principais MB's) s/restrinção de larguras
+    + kit0101(nLarg): -> Movel Base c/prateleira restrinção de larguras (300, 350, 400, 450, 500, 550, 600, 700, 800, 900, 1000, 1200)
+    + kit0102(nLarg): -> Movel Base gavetas restrinção de larguras (300, 350, 400, 450, 500, 550, 600)
+    + kit0103(nLarg): -> Movel Base lava-louça restrinção de larguras (600, 800, 900, 1000, 1100, 1200)
+    + kit0104(nLarg): -> Movel Base Forno restrinção de largura (600)
+
 2019-03-29 09:55 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
-	% kit0001(nAlt, nLarg, nEsp) -> Ilharga Base dir. c/rasgo e furação p/dobradiças
-	% kit0002(nAlt, nLarg, nEsp) -> Ilharga Base dir. c/rasgo e furação p/dobradiças e prateleiras
+    % kit0001(nAlt, nLarg, nEsp) -> Ilharga Base dir. c/rasgo e furação p/dobradiças
+    % kit0002(nAlt, nLarg, nEsp) -> Ilharga Base dir. c/rasgo e furação p/dobradiças e prateleiras
     ;         Comentários
     + kit0003(nLarg, nFundo, nPos, nEsp): -> Topo e Base p/MB
-	+ kit0004(nAlt, nLarg, nPos, nEsp): -> Ilharga Base s/rasgo e c/furação para dobradiças
-	+ kit0005(nAlt, nLarg, nEsp): -> Costa Base
-	+ kit0006(nLarg, nFundo, nEsp): -> Prateleira Base
-	; kit0050(nDim, nDis, nPos): -> Rasgo para as costas ou fundo de gavetas
-	+         Rasgo para topos e bases
+    + kit0004(nAlt, nLarg, nPos, nEsp): -> Ilharga Base s/rasgo e c/furação para dobradiças
+    + kit0005(nAlt, nLarg, nEsp): -> Costa Base
+    + kit0006(nLarg, nFundo, nEsp): -> Prateleira Base
+    ; kit0050(nDim, nDis, nPos): -> Rasgo para as costas ou fundo de gavetas
+    +         Rasgo para topos e bases
 
 2019-03-09 10:53 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
     ; reformulação das rotinas
-	; kit0001(nAlt, nLarg, nPos, nEsp) -> Ilharga Base c/rasgo e furação p/dobradiças
-	; kit0002(nAlt, nLarg, nPos, nEsp) -> Ilharga Base c/rasgo e furação p/dobradiças e prateleiras
-	;         Alterada a ordem dos parametros
-	;
-	; kit0053(nQuant, nDis, nPos, nAlt): -> Furo para prateleiras
-	;         Alterada a ordem dos parametros
-	;         Pequenas correcções
+    ; kit0001(nAlt, nLarg, nPos, nEsp) -> Ilharga Base c/rasgo e furação p/dobradiças
+    ; kit0002(nAlt, nLarg, nPos, nEsp) -> Ilharga Base c/rasgo e furação p/dobradiças e prateleiras
+    ;         Alterada a ordem dos parametros
+    ;
+    ; kit0053(nQuant, nDis, nPos, nAlt): -> Furo para prateleiras
+    ;         Alterada a ordem dos parametros
+    ;         Pequenas correcções
 
 2019-03-18 22:12 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
     ; reformulação das rotinas
-	; kit0000(nAlt, nLarg, nEsp = nAgl) -> Peça c/medidas livres (elemento básico)
-	; kit0001(nAlt, nLarg, nEsp = nAgl) -> Ilharga Base esq. c/rasgo e furação
-	; kit0002(nAlt, nLarg, nEsp = nAgl) -> Ilharga Base dir. c/rasgo e furação
-	;
-	; kit0050(nDim, nDis, nPos = 1) -> Rasgo para as costas ou fundo de gavetas
-	;                                   1 - Vertical esq/fundo
-	;                                   2 - Vertical dir/fundo
-	;                                   3 - Horizontal topos
+    ; kit0000(nAlt, nLarg, nEsp = nAgl) -> Peça c/medidas livres (elemento básico)
+    ; kit0001(nAlt, nLarg, nEsp = nAgl) -> Ilharga Base esq. c/rasgo e furação
+    ; kit0002(nAlt, nLarg, nEsp = nAgl) -> Ilharga Base dir. c/rasgo e furação
+    ;
+    ; kit0050(nDim, nDis, nPos = 1) -> Rasgo para as costas ou fundo de gavetas
+    ;                                   1 - Vertical esq/fundo
+    ;                                   2 - Vertical dir/fundo
+    ;                                   3 - Horizontal topos
     ;                                   4 - Horizontal fundos
-	; kit0051(nAlt, nPos) -> Furo para dobradiças
-	;                           1 - Esquerda
-	;                           2 - Direita
-	; kit0052(nAlt, nPos): # Furo para optimização das funções kit0051 e kit0053
-	; kit0053(nQuant, nPos, nAlt): -> Furo para prateleiras
+    ; kit0051(nAlt, nPos) -> Furo para dobradiças
+    ;                           1 - Esquerda
+    ;                           2 - Direita
+    ; kit0052(nAlt, nPos): # Furo para optimização das funções kit0051 e kit0053
+    ; kit0053(nQuant, nPos, nAlt): -> Furo para prateleiras
 
 2019-03-11 14:37 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
@@ -54,7 +67,7 @@
 2019-03-11 01:03 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   + ChangeLog.txt
   + Pasta FreeCAD
-    ; Inicial commit
+  ; Inicial commit
 
 
 /*
