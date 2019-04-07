@@ -6,10 +6,19 @@
      * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
  */
 
-2019-04-02 UTC Oaprendiz (jorgenunes5+prog gmail.com)
+2019-04-07 11:22 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
+    + exportViewToPNG(): -> Exportar para PNG
+    + Anime(): -> Rutina de animação
+    ;       Optimização das rutinas
+    + fusao(cBase, cTool): -> Rutina de Fusão
+    ;       Optimização das rutinas
+    + cortar(cBase, cTool): -> Rutina de Corte
+    ;        Optimização das rutinas
     + kit0008(nLarg, nFundo, nPos, nEsp): -> Prateleira Pentagonal
     + kit0009(nLarg, nFundo, nPos, nEsp): -> Topo e Base Pentagonal
+    + kit0010(nAlt, nLarg, nFundo, nPos = 1): -> Prumos para Cantos
+    ;         colocar furos
     * kit0050(nDim, nDis, nPos): -> Rasgo para as costas ou fundo de gavetas
     ;         correção do rasgo na ilharga esquerda
     ;         colocar 2o rasgo (rever)
@@ -18,6 +27,9 @@
     + kit0102(nLarg): -> Movel Base gavetas restrinção de larguras (300, 350, 400, 450, 500, 550, 600)
     + kit0103(nLarg): -> Movel Base lava-louça restrinção de larguras (600, 800, 900, 1000, 1100, 1200)
     + kit0104(nLarg): -> Movel Base Forno restrinção de largura (600)
+    + kit0105(nLarg): -> Movel Base Canto Pentagono restrinção de largura (950)
+    ;        melhorar a rotina calcular a posição dos prumos
+    ;        rever união das duas costas
 
 2019-03-29 09:55 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
