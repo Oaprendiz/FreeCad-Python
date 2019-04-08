@@ -6,8 +6,12 @@
      * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
  */
 
+2019-04-08 19:41 UTC Oaprendiz (jorgenunes5+prog gmail.com)
+  * MCL001.py
+
 2019-04-07 11:22 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
+    ; novas rotinas e optimização do código
     + exportViewToPNG(): -> Exportar para PNG
     + Anime(): -> Rutina de animação
     ;       Optimização das rutinas
