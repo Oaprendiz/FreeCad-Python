@@ -484,6 +484,70 @@ def kit0105(nLarg): # Movel Base Canto Pentagono
 		cTool = "Kit" + str(nKit).zfill(5)
 		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nLarg - nAgl/2-35-nAgl,nMB_fundo-59,nAgl/2),App.Rotation(App.Vector(0,0,1),270))
 
+def kit0106(nLarg): # Movel Base Canto L
+	if nLarg == 950:
+		global nKit, cKit
+		kit0002(nMB_alto, nMB_fundo)	# ------------------------------------------------ Ilharga esq.
+		cBase = "Kit" + str(nKit).zfill(5)
+		if lAnime: Anime()
+		kit0012(nLarg - nAgl-35, nMB_fundo-35, 2)	# ------------------------------------------------ Base
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl, 0, 0),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0002(nMB_alto, nMB_fundo, 2)	# ------------------------------------------------ Ilharga dir.
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nLarg - nMB_fundo, nMB_fundo - nLarg + nAgl, 0),App.Rotation(App.Vector(0,0,1),270))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0012(nLarg - nAgl-35, nMB_fundo-35)	# ------------------------------------------------ topo
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl, 0, nMB_alto-nAgl),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0011(nLarg - nAgl-60, nMB_fundo-59, 2)	# ------------------------------------------------ Prateleira
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl, 0, nMB_alto/2),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0005(nMB_alto - nAgl, nLarg - nAgl-35-nAgl)	# ---------------------------------------- Costas
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl/2,nMB_fundo-59,nAgl/2),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0005(nMB_alto - nAgl, nLarg - nAgl-35-nAgl)	# ---------------------------------------- Costas
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nLarg - nAgl/2-35-nAgl,nMB_fundo-59,nAgl/2),App.Rotation(App.Vector(0,0,1),270))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+
+def kit0107(nLarg): # Movel Base Canto Recto
+	if nLarg in range(900,1201,100):
+		global nKit, cKit
+		kit0100(nLarg)		# Template MB
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0006(nLarg - nAgl*2, nMB_fundo-59) # -------------------------------------------------- Prateleira
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl, 0, nMB_alto/2),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0007(nMB_alto, nMB_fundo, nAgl)	# ------------------------------------------------ Painel
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nLarg - nMB_fundo, 0, 0),App.Rotation(App.Vector(0,0,1),270))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0000(nMB_alto - nAgl*2, 30, 60)	# ------------------------------------------------------Prumo
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nLarg - nMB_fundo-nAgl - 20, 0, nAgl),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
 
 
 App.newDocument("Sem nome")
@@ -524,7 +588,9 @@ nDis_Aprat = 222			# Distancia do primeiro furo da prateleira
 #kit0010(700,30,60)
 #kit0100(900)
 #kit0011(950,580)
-kit0105(950)
+#kit0105(950)
+#kit0107(1200)
+kit0108(150)
 
 
 App.ActiveDocument.recompute()
