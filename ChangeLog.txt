@@ -6,10 +6,23 @@
      * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
  */
 
+2019-04-10 23:18 UTC Oaprendiz (jorgenunes5+prog gmail.com)
+  * MCL001.py
+    + kit0011(nLarg, nFundo, nEsp): -> Prateleira L
+    + kit0012(nLarg, nFundo, nPos, nEsp): -> Topo e Base L
+    + kit0013(nLarg, nFundo, nEsp): -> Prateleira Terminal
+    + kit0108(nLarg): -> Movel Base Garrafeira restrinção de largura (150)
+    + kit0109(nLarg): -> Movel Base Terminal restrinção de largura (300)
+  + FreeCAD.odt
+    * ficheiro com exemplos e informação
+
 2019-04-08 19:41 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
-    + def kit0106(nLarg): -> Movel Base Canto L
-    + def kit0107(nLarg): -> Movel Base Canto Recto
+    + kit0011(nLarg, nFundo, nEsp): -> Prateleira L
+    + kit0012(nLarg, nFundo, nPos, nEsp): -> Topo e Base L
+    + kit0013(nLarg, nFundo, nEsp): -> Prateleira Terminal
+    + kit0106(nLarg): -> Movel Base Canto L
+    + kit0107(nLarg): -> Movel Base Canto Recto
 
 2019-04-07 11:22 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py

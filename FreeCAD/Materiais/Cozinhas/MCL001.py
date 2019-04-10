@@ -200,6 +200,25 @@ def kit0012(nLarg, nFundo, nPos = 1, nEsp = nAgl): # Topo e Base L
 		kit0050(nLarg, nFundo - 24, 4) # 2 = rasgo horizontal base fundo
 		kit0050(nLarg - 24, -(nFundo - nLarg), 6) # 2 = rasgo horizontal topo dir
 
+def kit0013(nLarg, nFundo, nEsp = nAgl): # Prateleira Terminal
+	global nKit, nKit
+	nKit += 1
+	cKit = "Kit" + str(nKit).zfill(5)
+	pts=[]
+	pts.append(App.Vector(0,0,0))
+	pts.append(App.Vector(0, nFundo, 0))
+	pts.append(App.Vector(nLarg, nFundo, 0))
+	pts.append(App.Vector(nLarg, nFundo-440, 0))
+#	pts.append(App.Vector(nLarg-nFundo, nFundo-440,0))
+	pts.append(App.Vector(162, 0,0))
+	pts.append(App.Vector(0,0,0)) # make a closed polygon
+	wire=Part.makePolygon(pts)
+	face=Part.Face(wire)
+	P = face.extrude(App.Vector(0,0,nAgl))
+	App.ActiveDocument.addObject("Part::Feature", cKit)
+	App.ActiveDocument.getObject(cKit).Shape = P
+
+
 # ---------------------------------------- Componentes / Acessórios ----------------------------------------
 
 
@@ -549,11 +568,84 @@ def kit0107(nLarg): # Movel Base Canto Recto
 		if lAnime: Anime()
 		fusao(cBase, cTool)
 
+def kit0108(nLarg): # Movel Base Garrafeira
+	if nLarg == 150:
+		global nKit, cKit
+		nFundo = nMS_largo
+		kit0007(nMB_alto, nFundo)		# Ilharga Lisa
+		kit0050(nMB_alto, nFundo - 16, 1) # rasgo vertical
+		if lAnime: Anime()
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0000(nAgl, nFundo, nLarg-nAgl*2)
+		kit0050(nLarg, nFundo - 16, 4) # rasgo horizontal base
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl, 0, 0),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0000(nAgl, nFundo, nLarg-nAgl*2)
+		kit0050(nLarg, nFundo - 16, 3) # rasgo horizontal topo
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl, 0, nMB_alto - nAgl),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0005(nMB_alto - nAgl, nLarg - nAgl)	# ---------------------------------------- Costas
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl/2,nFundo-16,nAgl/2),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0007(nMB_alto, nFundo)		# Ilharga Lisa
+		kit0050(nMB_alto, nFundo - 16, 2) # rasgo vertical
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nLarg - nAgl, 0, 0),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		for n in range(1, 6):
+			cBase = "Kit" + str(nKit).zfill(5)
+			kit0000(nAgl, nFundo, nLarg-nAgl*2)
+			cTool = "Kit" + str(nKit).zfill(5)
+			App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl, 0, n*114),App.Rotation(App.Vector(0,0,1),0))
+			if lAnime: Anime()
+			fusao(cBase, cTool)
+
+def kit0109(nLarg): # Movel Base Terminal
+	if nLarg == 300:
+		global nKit, cKit
+		kit0007(nMB_alto, nMB_fundo - nAgl)		# Ilharga Lisa
+		if lAnime: Anime()
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0013(nLarg - nAgl, nMB_fundo - nAgl)
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl, 0, 0),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0013(nLarg - nAgl, nMB_fundo - nAgl)
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl, 0, nMB_alto/2),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0013(nLarg - nAgl, nMB_fundo - nAgl)
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nAgl, 0, nMB_alto-nAgl),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		kit0005(nMB_alto, nLarg, nAgl)	# ---------------------------------------- Costas
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(0,nMB_fundo - nAgl, 0),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+
+
+
 
 App.newDocument("Sem nome")
 lAnime = True
 nKit = 0					# Contagem de elementos
-cKit = 0					# Elemento actual
+cKit = ""					# Elemento actual
 nAgl = 16					# Espessura do aglomerado
 nMB_alto = 700				# Altura dos MB's
 nMB_fundo = 580				# Profundidade dos MB´s
@@ -590,10 +682,13 @@ nDis_Aprat = 222			# Distancia do primeiro furo da prateleira
 #kit0011(950,580)
 #kit0105(950)
 #kit0107(1200)
-kit0108(150)
-
+#kit0108(150)
+#kit0013(300-16,580-16)
+kit0109(300)
 
 App.ActiveDocument.recompute()
 Gui.activeDocument().activeView().viewAxonometric()
 Gui.SendMsgToActiveView("ViewFit")
 #exportViewToPNG()
+
+
