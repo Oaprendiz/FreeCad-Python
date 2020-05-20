@@ -1,3 +1,6 @@
+# https://www.youtube.com/watch?v=vDcaFq6IEJM
+
+
 # https://docs.python.org/3/extending/extending.html?highlight=true
 
 # http://miba.juergen-riegel.net/
@@ -200,7 +203,7 @@ def kit0012(nLarg, nFundo, nPos = 1, nEsp = nAgl): # Topo e Base L
 		kit0050(nLarg, nFundo - 24, 4) # 2 = rasgo horizontal base fundo
 		kit0050(nLarg - 24, -(nFundo - nLarg), 6) # 2 = rasgo horizontal topo dir
 
-def kit0013(nLarg, nFundo, nEsp = nAgl): # Prateleira Terminal
+def kit0013(nLarg, nFundo, nEsp = nAgl): # Prateleira Terminal Dir.
 	global nKit, nKit
 	nKit += 1
 	cKit = "Kit" + str(nKit).zfill(5)
@@ -209,8 +212,24 @@ def kit0013(nLarg, nFundo, nEsp = nAgl): # Prateleira Terminal
 	pts.append(App.Vector(0, nFundo, 0))
 	pts.append(App.Vector(nLarg, nFundo, 0))
 	pts.append(App.Vector(nLarg, nFundo-440, 0))
-#	pts.append(App.Vector(nLarg-nFundo, nFundo-440,0))
 	pts.append(App.Vector(162, 0,0))
+	pts.append(App.Vector(0,0,0)) # make a closed polygon
+	wire=Part.makePolygon(pts)
+	face=Part.Face(wire)
+	P = face.extrude(App.Vector(0,0,nAgl))
+	App.ActiveDocument.addObject("Part::Feature", cKit)
+	App.ActiveDocument.getObject(cKit).Shape = P
+
+def kit0014(nLarg, nFundo, nEsp = nAgl): # Prateleira Terminal Esq.
+	global nKit, cKit
+	nKit += 1
+	cKit = "Kit" + str(nKit).zfill(5)
+	pts=[]
+	pts.append(App.Vector(0,0,0))
+	pts.append(App.Vector(0, 440, 0))
+	pts.append(App.Vector(nLarg, 440, 0))
+	pts.append(App.Vector(nLarg, -140, 0))
+	pts.append(App.Vector(122, -140,0))
 	pts.append(App.Vector(0,0,0)) # make a closed polygon
 	wire=Part.makePolygon(pts)
 	face=Part.Face(wire)
@@ -639,6 +658,36 @@ def kit0109(nLarg): # Movel Base Terminal
 		if lAnime: Anime()
 		fusao(cBase, cTool)
 
+def kit0110(nLarg): # Movel Base Terminal
+	if nLarg == 300:
+		global nKit, cKit
+		kit0014(nLarg - nAgl, nMB_fundo - nAgl)
+		App.ActiveDocument.getObject(cKit).Placement = App.Placement(App.Vector(0, 140, 0),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0007(nMB_alto, nMB_fundo - nAgl)		# Ilharga Lisa
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(nLarg-nAgl, 0, 0),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0014(nLarg - nAgl, nMB_fundo - nAgl)
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(0, 140, nMB_alto/2),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		cBase = "Kit" + str(nKit).zfill(5)
+		kit0014(nLarg - nAgl, nMB_fundo - nAgl)
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(0, 140, nMB_alto-nAgl),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+		kit0005(nMB_alto, nLarg, nAgl)	# ---------------------------------------- Costas
+		cTool = "Kit" + str(nKit).zfill(5)
+		App.ActiveDocument.getObject(cTool).Placement = App.Placement(App.Vector(0,nMB_fundo - nAgl, 0),App.Rotation(App.Vector(0,0,1),0))
+		if lAnime: Anime()
+		fusao(cBase, cTool)
+
 
 
 
@@ -684,7 +733,7 @@ nDis_Aprat = 222			# Distancia do primeiro furo da prateleira
 #kit0107(1200)
 #kit0108(150)
 #kit0013(300-16,580-16)
-kit0109(300)
+kit0110(300)
 
 App.ActiveDocument.recompute()
 Gui.activeDocument().activeView().viewAxonometric()

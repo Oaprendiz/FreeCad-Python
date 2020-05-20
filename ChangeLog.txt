@@ -6,6 +6,10 @@
      * Change, ! Fix, % Optimization, + Addition, - Removal, ; Comment
  */
 
+2019-04- UTC Oaprendiz (jorgenunes5+prog gmail.com)
+  * MCL001.py
+    ; refurmulação do ficheiro para alterar posição do eixo de rotação e posição
+
 2019-04-10 23:18 UTC Oaprendiz (jorgenunes5+prog gmail.com)
   * MCL001.py
     + kit0011(nLarg, nFundo, nEsp): -> Prateleira L
